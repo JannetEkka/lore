@@ -42,6 +42,8 @@ def main(argv=None):
         caps = Caps(months=a.months, max_repos=a.max_repos, max_prs=a.max_prs)
         snap = github.fetch(a.target, DATA, token=os.environ.get("GITHUB_TOKEN"), caps=caps,
                             repos=a.repos.split(",") if a.repos else None)
+        if not snap["repos"]:
+            sys.exit("Nothing fetched: " + ", ".join(snap["incomplete"]))
         out = os.path.join(DATA, db.graph_name(a.target) + ".json")
         with open(out, "w") as fh:
             json.dump(snap, fh)

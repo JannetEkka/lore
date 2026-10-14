@@ -38,6 +38,10 @@ class RateLimited(Exception):
     """GitHub's hourly allowance is used up. Cached pages are kept, so a re-run resumes."""
 
 
+class Refused(Exception):
+    """GitHub (or a proxy in front of it) refused the request: private repo, no access, bad token."""
+
+
 def is_bot(user) -> bool:
     if not user:
         return True
@@ -103,6 +107,12 @@ class GitHub:
         self.remaining = int(r.headers.get("X-RateLimit-Remaining", "1"))
         if r.status_code in (403, 429) and self.remaining == 0:
             raise RateLimited("GitHub's hourly allowance is used up")
+        if r.status_code in (401, 403, 404):
+            try:
+                message = r.json().get("message", "")
+            except ValueError:
+                message = r.text[:200]
+            raise Refused(f"GitHub refused {url} ({r.status_code}): {message}")
         r.raise_for_status()
         data = r.json()
         if cached:
@@ -122,7 +132,7 @@ def org_repos(gh, org, caps):
     """The org's most recently pushed public repos, without forks or archived ones."""
     try:
         repos = list(gh.pages(f"/orgs/{org}/repos", {"type": "public", "sort": "pushed"}, max_pages=2))
-    except requests.HTTPError:
+    except Refused:
         repos = list(gh.pages(f"/users/{org}/repos", {"sort": "pushed"}, max_pages=2))
     repos = [r for r in repos if not r.get("fork") and not r.get("archived")]
     repos.sort(key=lambda r: r.get("pushed_at") or "", reverse=True)
@@ -235,5 +245,8 @@ def fetch(target, data_dir, token=None, caps=None, repos=None, log=print):
         except RateLimited:
             snapshot["incomplete"].append(full)
             log(f"  {full}: GitHub's hourly allowance ran out; re-run later to finish (pages so far are cached)")
+        except Refused as e:
+            snapshot["incomplete"].append(full)
+            log(f"  {full}: skipped. {e}")
     log(f"Done: {gh.calls} API calls, {gh.remaining} left this hour")
     return snapshot
