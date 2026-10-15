@@ -8,6 +8,7 @@
   python -m lore risk FalkorDB
 """
 import argparse
+import gzip
 import json
 import os
 import sys
@@ -19,6 +20,11 @@ from .load import load_snapshot
 DATA = os.path.join(os.path.dirname(__file__), "..", "data")
 
 
+def read_snapshot(path):
+    with (gzip.open(path, "rt") if path.endswith(".gz") else open(path)) as fh:
+        return json.load(fh)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="lore")
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -28,6 +34,8 @@ def main(argv=None):
     f.add_argument("--months", type=int, default=12)
     f.add_argument("--max-repos", type=int, default=10)
     f.add_argument("--max-prs", type=int, default=500)
+    f.add_argument("--max-review-calls", type=int, default=150)
+    f.add_argument("--out", help="snapshot path; .json.gz is gzipped (default data/<target>.json)")
     lo = sub.add_parser("load")
     lo.add_argument("snapshot")
     for name in ("who-knows", "related", "reviewers", "risk"):
@@ -39,20 +47,20 @@ def main(argv=None):
     a = ap.parse_args(argv)
 
     if a.cmd == "fetch":
-        caps = Caps(months=a.months, max_repos=a.max_repos, max_prs=a.max_prs)
+        caps = Caps(months=a.months, max_repos=a.max_repos, max_prs=a.max_prs, max_review_calls=a.max_review_calls)
         snap = github.fetch(a.target, DATA, token=os.environ.get("GITHUB_TOKEN"), caps=caps,
                             repos=a.repos.split(",") if a.repos else None)
         if not snap["repos"]:
             sys.exit("Nothing fetched: " + ", ".join(snap["incomplete"]))
-        out = os.path.join(DATA, db.graph_name(a.target) + ".json")
-        with open(out, "w") as fh:
+        out = a.out or os.path.join(DATA, db.graph_name(a.target) + ".json")
+        os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
+        with (gzip.open(out, "wt") if out.endswith(".gz") else open(out, "w")) as fh:
             json.dump(snap, fh)
         print(f"Snapshot: {out}")
         return
 
     if a.cmd == "load":
-        with open(a.snapshot) as fh:
-            snap = json.load(fh)
+        snap = read_snapshot(a.snapshot)
         g = db.connect().select_graph(db.graph_name(snap["target"]))
         counts = load_snapshot(g, snap)
         print(f"Graph {db.graph_name(snap['target'])}: " + ", ".join(f"{k} {v}" for k, v in counts.items()))

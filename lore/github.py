@@ -210,9 +210,7 @@ def fetch_repo(gh, full, since, caps, git_dir, log=print):
 
     # Approvals and change requests have no bulk endpoint: one call per merged PR, so token only.
     if gh.has_token:
-        for p in prs:
-            if p["state"] != "merged":
-                continue
+        for p in [p for p in prs if p["state"] == "merged"][: caps.max_review_calls]:
             for r in gh.get(f"/repos/{full}/pulls/{p['number']}/reviews", {"per_page": 100}):
                 if not is_bot(r.get("user")) and r["user"]["login"] != p["author"] and r.get("submitted_at"):
                     reviews.append({"pr": p["number"], "author": r["user"]["login"], "state": r["state"],

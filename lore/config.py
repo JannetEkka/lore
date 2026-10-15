@@ -23,3 +23,4 @@ class Caps:
     max_prs: int = 500         # per repo
     max_issues: int = 500      # per repo
     max_comment_pages: int = 10  # 100 comments a page, per repo and comment kind
+    max_review_calls: int = 150  # per repo, with a token: approvals for the most recent merged PRs
