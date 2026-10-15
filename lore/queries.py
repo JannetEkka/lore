@@ -209,3 +209,127 @@ def knowledge_risk(g, days=180, min_prs=3, min_score=1.0, now=None, trace=None):
     return trace.run(g, "knowledge_risk", RISK,
                      {"since": now - days * 86400, "min_prs": min_prs, "min_score": min_score})
 
+
+
+# Tools the agent uses to find its way around ---------------------------------------------------------
+
+FIND_AREAS = """
+MATCH (a:Area)<-[:IN]-(f:File)
+WHERE any(w IN $words WHERE toLower(a.path) CONTAINS w OR toLower(f.path) CONTAINS w)
+WITH a, count(DISTINCT f) AS files
+OPTIONAL MATCH (a)<-[:IN]-(:File)<-[:TOUCHES]-(pr:PR)
+RETURN a.id AS area, a.path AS path, a.repo AS repo, files, count(DISTINCT pr) AS prs
+ORDER BY prs DESC LIMIT 8"""
+
+
+def find_areas(g, text, trace=None):
+    """Areas whose directory or files mention any of the words, busiest first."""
+    trace = trace if trace is not None else Trace()
+    words = sorted(tokens(text) | {w for w in re.findall(r"[a-z0-9_]{3,}", (text or "").lower())})
+    return trace.run(g, "find_areas", FIND_AREAS, {"words": words}) if words else []
+
+
+GET_ITEM = """
+MATCH (i:Item {id: $id})
+OPTIONAL MATCH (i)-[:HAS_LABEL]->(l:Label)
+OPTIONAL MATCH (p:Person)-[:OPENED|AUTHORED]->(i)
+RETURN i.id AS id, labels(i)[0] AS kind, i.title AS title, substring(coalesce(i.body, ''), 0, 1200) AS body,
+       i.state AS state, i.url AS url, p.login AS author, collect(l.name) AS labels"""
+
+RESOLVE = "MATCH (i:Item {number: $n}) RETURN i.id AS id ORDER BY i.created_at DESC LIMIT 1"
+
+
+def resolve_item(g, ref, trace=None):
+    """'owner/repo#12', '#12' or '12' -> an Item id in this graph, or None."""
+    trace = trace if trace is not None else Trace()
+    ref = str(ref).strip()
+    if "/" in ref and "#" in ref:
+        return ref
+    m = re.search(r"(\d+)", ref)
+    if not m:
+        return None
+    rows = trace.run(g, "resolve_item", RESOLVE, {"n": int(m.group(1))})
+    return rows[0]["id"] if rows else None
+
+
+def get_item(g, ref, trace=None):
+    trace = trace if trace is not None else Trace()
+    item_id = resolve_item(g, ref, trace)
+    rows = trace.run(g, "get_item", GET_ITEM, {"id": item_id}) if item_id else []
+    return rows[0] if rows else None
+
+
+SEARCH_HISTORY = """
+CALL db.idx.fulltext.queryNodes('Item', $q) YIELD node, score
+OPTIONAL MATCH (p:Person)-[:OPENED|AUTHORED]->(node)
+RETURN node.id AS id, labels(node)[0] AS kind, node.title AS title, node.state AS state, node.url AS url,
+       substring(coalesce(node.body, ''), 0, 600) AS excerpt, p.login AS author,
+       coalesce(node.merged_at, node.created_at) AS at, score
+ORDER BY score DESC LIMIT $limit"""
+
+
+def search_history(g, text, limit=8, trace=None):
+    """Full-text search over PR and issue titles and descriptions: where things were discussed and decided."""
+    trace = trace if trace is not None else Trace()
+    words = [w for w in re.findall(r"[a-z0-9]{3,}", (text or "").lower()) if w not in STOPWORDS]
+    if not words:
+        return []
+    return trace.run(g, "search_history", SEARCH_HISTORY, {"q": " | ".join(words[:8]), "limit": limit})
+
+
+GOOD_FIRST = """
+MATCH (i:Issue {state: 'open'})-[:HAS_LABEL]->(l:Label)
+WHERE any(t IN ['good first issue', 'good-first-issue', 'help wanted', 'beginner', 'easy', 'first-timers-only']
+          WHERE toLower(l.name) CONTAINS t)
+RETURN DISTINCT i.id AS id, i.title AS title, i.url AS url, i.created_at AS created_at, collect(l.name) AS labels
+ORDER BY created_at DESC LIMIT 25"""
+
+
+def good_first_issues(g, area_ids=None, limit=5, trace=None):
+    """Open beginner-labelled issues; with areas given, those closest to them come first."""
+    trace = trace if trace is not None else Trace()
+    issues = trace.run(g, "good_first_issues", GOOD_FIRST)
+    wanted = set(area_ids or [])
+    for i in issues:
+        areas = issue_areas(g, i["id"], trace=trace) if wanted else []
+        i["areas"] = [a["path"] for a in areas]
+        i["match"] = len(wanted & {a["area"] for a in areas})
+    issues.sort(key=lambda i: i["match"], reverse=True)
+    return issues[:limit]
+
+
+# Memory: what Lore has learned, kept in the graph with its sources ------------------------------------
+
+SAVE_DECISION = """
+MATCH (s:Item) WHERE s.id IN $sources
+WITH collect(s) AS sources WHERE size(sources) > 0
+CREATE (d:Decision {id: $id, summary: $summary, created_at: $now})
+FOREACH (s IN sources | MERGE (d)-[:SOURCE]->(s))
+WITH d, sources UNWIND sources AS s
+OPTIONAL MATCH (s)-[:TOUCHES]->(:File)-[:IN]->(a:Area)
+WITH d, collect(DISTINCT a) AS areas
+FOREACH (a IN areas | MERGE (d)-[:ABOUT]->(a))
+RETURN d.id AS id, size(areas) AS areas"""
+
+RECALL_DECISIONS = """
+MATCH (d:Decision)-[:SOURCE]->(s:Item)
+WHERE any(w IN $words WHERE toLower(d.summary) CONTAINS w)
+RETURN d.id AS id, d.summary AS summary, d.created_at AS at, collect(s.id) AS sources, collect(s.url) AS urls
+ORDER BY at DESC LIMIT 5"""
+
+
+def save_decision(g, summary, source_ids, trace=None):
+    """Store an explained decision as a node linked to the PRs/issues it came from. Refused without sources."""
+    trace = trace if trace is not None else Trace()
+    if not source_ids:
+        return {"saved": False, "reason": "a decision needs at least one source"}
+    rows = trace.run(g, "save_decision", SAVE_DECISION, {
+        "id": f"decision-{int(time.time() * 1000)}", "summary": summary[:600],
+        "sources": list(source_ids), "now": int(time.time())})
+    return {"saved": bool(rows), **(rows[0] if rows else {})}
+
+
+def recall_decisions(g, text, trace=None):
+    trace = trace if trace is not None else Trace()
+    words = [w for w in tokens(text)][:8]
+    return trace.run(g, "recall_decisions", RECALL_DECISIONS, {"words": words}) if words else []

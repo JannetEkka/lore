@@ -37,7 +37,8 @@ SNAPSHOT = {
     "repos": [{
         "name": "acme/db", "url": "https://github.com/acme/db",
         "prs": [
-            pr(10, "alice", ["src/index/index.c", "src/index/vector.c"], merged_days=10, fixes=[1]),
+            dict(pr(10, "alice", ["src/index/index.c", "src/index/vector.c"], merged_days=10, fixes=[1]),
+               body="Switch the vector index to HNSW because brute force was too slow for large dims."),
             pr(11, "alice", ["src/index/index.c"], merged_days=200),
             pr(12, "bob", ["src/parser/parse.c"], merged_days=20, fixes=[2]),
             pr(13, "carol", ["src/parser/lexer.c"], merged_days=5),
@@ -50,7 +51,7 @@ SNAPSHOT = {
             issue(2, "frank", "Parser fails on nested lists", 25, labels=["bug", "parser"], state="closed"),
             issue(3, "erin", "Crash when querying vector index after restart", 1, labels=["index"], refs=[1],
                   body="Same as before, the index breaks."),
-            issue(4, "gina", "Lexer error with unicode", 1, labels=["parser"]),
+            issue(4, "gina", "Lexer error with unicode", 1, labels=["parser", "good first issue"]),
         ],
         "reviews": [
             {"pr": 10, "author": "bob", "state": "APPROVED", "at": ago(9)},

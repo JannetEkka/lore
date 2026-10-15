@@ -29,6 +29,11 @@ def create_indexes(g):
             g.query(f"CREATE INDEX FOR (n:{label}) ON (n.{prop})")
         except Exception:
             pass  # already there
+    try:
+        # Full-text search over PR and issue titles and descriptions (FalkorDB's built-in RediSearch index).
+        g.query("CALL db.idx.fulltext.createNodeIndex('Item', 'title', 'body')")
+    except Exception:
+        pass
 
 
 def rows_from_snapshot(snap):
