@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lore: who knows what in an open-source project</title>
+<meta name="description" content="Lore turns a GitHub project's history into a graph and answers who knows what, why it's built that way, and who should look at a new issue, with the path behind every answer.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;550;600;750&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="/"><span class="dot"></span>Lore</a>
+  <span class="spacer"></span>
+  <a class="btn small" href="/how">How it works</a>
+  <a class="btn small" href="https://github.com/JannetEkka/lore">GitHub</a>
+</div>
+
+<section class="hero">
+  <span class="pill">Built on FalkorDB · Graph Hacks 2026</span>
+  <h1>What an open-source project knows<br><em>but never wrote down.</em></h1>
+  <p class="lead">Lore reads a project's public GitHub history (who wrote and reviewed what, which issues each PR fixed) into a graph, then answers the questions newcomers and maintainers actually ask. Every answer shows the path through the graph behind it.</p>
+  <div class="cta">
+    <a class="btn primary" href="/app?project=FalkorDB">Try it on FalkorDB, no sign-in</a>
+    <a class="btn" href="/how">See how it works</a>
+  </div>
+</section>
+
+<section class="cards">
+  <div class="card"><span class="pill">Who knows this?</span><h3>Find the right person</h3><p>Ranked by merged PRs, reviews and comments in that part of the code, recent work counting more. Each name comes with the PRs that prove it.</p></div>
+  <div class="card"><span class="pill">Why is it like this?</span><h3>Trace a decision to its source</h3><p>Lore searches the PRs and issues where it was discussed, explains the reason with links, and remembers it for next time.</p></div>
+  <div class="card"><span class="pill">Triage</span><h3>Route a new issue</h3><p>Related past issues, the area it touches, an active person who knows it, and a drafted reply. A dry run: Lore never posts anywhere.</p></div>
+  <div class="card"><span class="pill">First contribution</span><h3>Get a newcomer started</h3><p>Say what you know and what interests you; get the docs to read, a good first issue nearby, and who reviews that area.</p></div>
+  <div class="card"><span class="pill amber">Knowledge risk</span><h3>See where knowledge is thin</h3><p>Areas with recent work that only one active person knows well.</p></div>
+  <div class="card"><span class="pill">Under the hood</span><h3>Watch it think</h3><p>Every tool the agent picks and every Cypher query it runs streams in as it works, then the evidence graph.</p></div>
+</section>
+
+<section class="band">
+  <div class="panel">
+    <h3 style="margin-top:0">How it works, in three lines</h3>
+    <p class="muted" style="margin:0">1. A GitHub Action fetches the project's public history every six hours: PRs, reviews, issues, comments, and the files each merged PR changed.<br>
+    2. FalkorDB stores it as a graph and computes who knows each area of the code.<br>
+    3. A Gemini agent answers by choosing graph queries as tools. It may only say what the graph backs, and it cites the PR or issue for each claim.</p>
+  </div>
+</section>
+
+<div class="footer">Public GitHub data only: logins, never emails or names. Built for Graph Hacks (FalkorDB × WeMakeDevs) by Jannet Ekka, with Claude Code as the coding assistant.</div>
+</body>
+</html>

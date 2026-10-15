@@ -119,7 +119,7 @@ def issue_areas(g, issue_id, top=3, trace=None):
 DIRECT_LINKS = """
 MATCH (i:Issue {id: $id})-[:REFERS_TO|FIXES*1..2]-(o:Item)
 WHERE o <> i
-RETURN DISTINCT o.id AS id, o.title AS title, o.url AS url, o.state AS state, labels(o)[0] AS kind"""
+RETURN DISTINCT o.id AS id, o.title AS title, o.url AS url, o.state AS state, [l IN labels(o) WHERE l <> 'Item'][0] AS kind"""
 
 SAME_AREA = """
 MATCH (a:Area) WHERE a.id IN $areas
@@ -233,7 +233,7 @@ GET_ITEM = """
 MATCH (i:Item {id: $id})
 OPTIONAL MATCH (i)-[:HAS_LABEL]->(l:Label)
 OPTIONAL MATCH (p:Person)-[:OPENED|AUTHORED]->(i)
-RETURN i.id AS id, labels(i)[0] AS kind, i.title AS title, substring(coalesce(i.body, ''), 0, 1200) AS body,
+RETURN i.id AS id, [l IN labels(i) WHERE l <> 'Item'][0] AS kind, i.title AS title, substring(coalesce(i.body, ''), 0, 1200) AS body,
        i.state AS state, i.url AS url, p.login AS author, collect(l.name) AS labels"""
 
 RESOLVE = "MATCH (i:Item {number: $n}) RETURN i.id AS id ORDER BY i.created_at DESC LIMIT 1"
@@ -262,7 +262,7 @@ def get_item(g, ref, trace=None):
 SEARCH_HISTORY = """
 CALL db.idx.fulltext.queryNodes('Item', $q) YIELD node, score
 OPTIONAL MATCH (p:Person)-[:OPENED|AUTHORED]->(node)
-RETURN node.id AS id, labels(node)[0] AS kind, node.title AS title, node.state AS state, node.url AS url,
+RETURN node.id AS id, [l IN labels(node) WHERE l <> 'Item'][0] AS kind, node.title AS title, node.state AS state, node.url AS url,
        substring(coalesce(node.body, ''), 0, 600) AS excerpt, p.login AS author,
        coalesce(node.merged_at, node.created_at) AS at, score
 ORDER BY score DESC LIMIT $limit"""

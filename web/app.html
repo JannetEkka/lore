@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lore workspace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;550;600;750&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.30.2/cytoscape.min.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="/"><span class="dot"></span>Lore</a>
+  <label id="t-project">Project <select id="project"></select></label>
+  <label id="t-model">Model <select id="model"></select></label>
+  <span class="muted" id="fresh" style="font-size:12.5px"></span>
+  <span class="spacer"></span>
+  <button class="btn small" id="keybtn" title="Use your own free Gemini key">Own key</button>
+  <button class="btn small" id="helpbtn">How to use</button>
+  <a class="btn small" href="/how">How it works</a>
+</div>
+
+<main class="workspace">
+  <section>
+    <div class="tabs" id="tabs">
+      <button class="tab on" data-tab="ask">Ask</button>
+      <button class="tab" data-tab="triage">Triage an issue</button>
+      <button class="tab" data-tab="first">First contribution</button>
+      <button class="tab" data-tab="risk">Knowledge risk</button>
+    </div>
+
+    <div class="panel" data-pane="ask">
+      <div class="askbox" id="t-ask">
+        <textarea id="question" rows="2" placeholder="Ask about this project: who knows the query planner? why does it do X?"></textarea>
+        <button class="btn primary" id="askbtn">Ask</button>
+      </div>
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div class="panel" data-pane="triage" hidden>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <strong>Open issues</strong>
+        <select id="ifilter" class="field" style="flex:0 0 auto;width:auto;min-height:0;padding:5px 8px">
+          <option value="newest">Newest</option><option value="unlabelled">No label yet</option><option value="no-reply">No reply yet</option>
+        </select>
+        <span class="spacer" style="flex:1"></span>
+        <input id="issueref" class="field" style="max-width:260px;min-height:0;padding:6px 10px" placeholder="or paste an issue link or #number">
+        <button class="btn small" id="triagebtn">Triage</button>
+      </div>
+      <ul class="list" id="issues" style="margin-top:8px;max-height:340px;overflow-y:auto"></ul>
+    </div>
+
+    <div class="panel" data-pane="first" hidden>
+      <p style="margin-top:0">Tell Lore what you know and what interests you. It plans a first contribution: what to read, a good first issue nearby, and who reviews that area.</p>
+      <input id="skills" class="field" placeholder="What you know, e.g. Python, a bit of C" style="margin-bottom:8px">
+      <input id="interest" class="field" placeholder="What interests you, e.g. vector search, the Python client" style="margin-bottom:10px">
+      <button class="btn primary" id="firstbtn">Plan my first contribution</button>
+    </div>
+
+    <div class="panel" data-pane="risk" hidden>
+      <p style="margin-top:0">Areas with at least 3 merged PRs in the last 180 days that at most one active person knows well. Not a judgement of anyone: a map of where help would spread knowledge.</p>
+      <div id="riskbody" class="muted">Loading…</div>
+    </div>
+
+    <div class="panel answer" id="answer" hidden>
+      <div id="dry" class="badge-dry" hidden>Dry run: a draft for a maintainer. Lore never posts anywhere.</div>
+      <h4 id="answerhead">Answer</h4>
+      <div class="body" id="answerbody"></div>
+      <div style="display:flex;gap:8px;margin-top:6px">
+        <button class="btn small" id="copybtn" hidden>Copy reply</button>
+        <span class="muted" id="answermeta" style="font-size:12.5px;align-self:center"></span>
+      </div>
+    </div>
+  </section>
+
+  <aside class="side panel" id="t-side">
+    <div class="tabs">
+      <button class="tab on" data-side="hood">Under the hood</button>
+      <button class="tab" data-side="proof">Proof</button>
+    </div>
+    <div class="steps" id="steps" data-sidepane="hood"><div class="empty">Ask something. Each tool Lore picks and each Cypher query it runs on the graph will appear here as it happens.</div></div>
+    <div data-sidepane="proof" hidden>
+      <div class="legend"><span style="--c:#6d4aff">person</span><span style="--c:#1f8a5b">pull request</span><span style="--c:#b7791f">area of the code</span><span style="--c:#8a8798">issue</span></div>
+      <div id="cy"></div>
+      <ul class="sources list" id="sources"></ul>
+    </div>
+  </aside>
+</main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
