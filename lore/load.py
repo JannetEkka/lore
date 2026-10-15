@@ -52,7 +52,7 @@ def rows_from_snapshot(snap):
         for p in repo["prs"]:
             pid = f"{name}#{p['number']}"
             seen(p["author"], p["merged_at"] or p["created_at"])
-            r["prs"].append({"id": pid, "repo": name, "number": p["number"], "title": p["title"],
+            r["prs"].append({"id": pid, "repo": name, "number": p["number"], "title": p["title"], "body": p.get("body", ""),
                              "author": p["author"], "state": p["state"], "url": p["url"],
                              "created_at": p["created_at"], "merged_at": p["merged_at"]})
             for path in p.get("files", []):
@@ -122,7 +122,7 @@ def load_snapshot(g, snap, now=None):
     _write(g, "UNWIND $rows AS x MERGE (p:Person {login: x.login}) SET p.last_active = x.last_active", r["people"])
     _write(g, """UNWIND $rows AS x
         MERGE (pr:PR:Item {id: x.id})
-        SET pr.repo = x.repo, pr.number = x.number, pr.title = x.title, pr.state = x.state, pr.url = x.url,
+        SET pr.repo = x.repo, pr.number = x.number, pr.title = x.title, pr.body = x.body, pr.state = x.state, pr.url = x.url,
             pr.created_at = x.created_at, pr.merged_at = x.merged_at
         WITH pr, x MATCH (p:Person {login: x.author}) MERGE (p)-[:AUTHORED]->(pr)""", r["prs"])
     _write(g, """UNWIND $rows AS x

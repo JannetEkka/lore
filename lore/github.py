@@ -167,7 +167,8 @@ def fetch_repo(gh, full, since, caps, git_dir, log=print):
             continue
         fixes, refs = parse_refs(f"{p['title']}\n{p.get('body') or ''}")
         prs.append({
-            "number": p["number"], "title": p["title"], "author": p["user"]["login"],
+            "number": p["number"], "title": p["title"], "body": (p.get("body") or "")[:1500],
+            "author": p["user"]["login"],
             "state": "merged" if p.get("merged_at") else p["state"],
             "created_at": iso_to_epoch(p["created_at"]), "merged_at": iso_to_epoch(p.get("merged_at")),
             "labels": [l["name"] for l in p.get("labels", [])],
