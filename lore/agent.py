@@ -55,6 +55,8 @@ TOOLS = [
      "parameters": _obj({})},
     {"name": "good_first_issues", "description": "Open beginner-friendly issues, closest to the given areas first.",
      "parameters": _obj({"area_ids": {"type": "ARRAY", "items": S}})},
+    {"name": "teams", "description": "The teams that actually work together (community detection over who reviews whom), each with its central people (PageRank) and the areas it knows.",
+     "parameters": _obj({})},
     {"name": "recall_decisions", "description": "Decisions Lore has already worked out and saved, with their sources.",
      "parameters": _obj({"text": S}, ["text"])},
     {"name": "save_decision", "description": "Remember a decision you explained: a one-sentence summary and the PR/issue ids it came from.",
@@ -82,6 +84,8 @@ def execute(g, name, args, trace):
         return queries.knowledge_risk(g, trace=trace)
     if name == "good_first_issues":
         return queries.good_first_issues(g, args.get("area_ids") or [], trace=trace)
+    if name == "teams":
+        return queries.teams(g, trace=trace)
     if name == "recall_decisions":
         return queries.recall_decisions(g, args.get("text", ""), trace=trace)
     if name == "save_decision":
@@ -151,7 +155,7 @@ def _call(model, key, body):
     return r.json(), None
 
 
-def run(g, question, project, model=None, key=None, max_steps=8):
+def run(g, question, project, model=None, key=None, max_steps=8, user_note=None):
     key = key or os.environ.get("GEMINI_API_KEY")
     if not key:
         yield {"type": "error", "message": "No Gemini key: set GEMINI_API_KEY or paste your own key."}
@@ -162,7 +166,7 @@ def run(g, question, project, model=None, key=None, max_steps=8):
         yield {"type": "error", "message": f"Couldn't list Gemini models: {e}"}
         return
     body = {
-        "systemInstruction": {"parts": [{"text": SYSTEM.format(project=project)}]},
+        "systemInstruction": {"parts": [{"text": SYSTEM.format(project=project) + ("\n\n" + user_note if user_note else "")}]},
         "contents": [{"role": "user", "parts": [{"text": question}]}],
         "tools": [{"functionDeclarations": TOOLS}],
         "generationConfig": {"temperature": 0.2},

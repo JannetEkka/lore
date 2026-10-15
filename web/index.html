@@ -12,7 +12,8 @@
   <a class="logo" href="/"><span class="dot"></span>Lore</a>
   <span class="spacer"></span>
   <a class="btn small" href="/how">How it works</a>
-  <a class="btn small" href="https://github.com/JannetEkka/lore">GitHub</a>
+  <a class="btn small" href="https://github.com/JannetEkka/lore">Source code</a>
+  <a class="btn small primary" href="/auth/login">Sign in with GitHub</a>
 </div>
 
 <section class="hero">
@@ -21,6 +22,7 @@
   <p class="lead">Lore reads a project's public GitHub history (who wrote and reviewed what, which issues each PR fixed) into a graph, then answers the questions newcomers and maintainers actually ask. Every answer shows the path through the graph behind it.</p>
   <div class="cta">
     <a class="btn primary" href="/app?project=FalkorDB">Try it on FalkorDB, no sign-in</a>
+    <a class="btn" href="/auth/login">Sign in to add your own project</a>
     <a class="btn" href="/how">See how it works</a>
   </div>
 </section>
@@ -30,6 +32,8 @@
   <div class="card"><span class="pill">Why is it like this?</span><h3>Trace a decision to its source</h3><p>Lore searches the PRs and issues where it was discussed, explains the reason with links, and remembers it for next time.</p></div>
   <div class="card"><span class="pill">Triage</span><h3>Route a new issue</h3><p>Related past issues, the area it touches, an active person who knows it, and a drafted reply. A dry run: Lore never posts anywhere.</p></div>
   <div class="card"><span class="pill">First contribution</span><h3>Get a newcomer started</h3><p>Say what you know and what interests you; get the docs to read, a good first issue nearby, and who reviews that area.</p></div>
+  <div class="card"><span class="pill">Teams</span><h3>See who really works together</h3><p>Community detection over who reviews whom finds the teams no org chart shows, and PageRank finds who holds each one together.</p></div>
+  <div class="card"><span class="pill">Memory</span><h3>Pick up where you left off</h3><p>Signed in, Lore keeps a graph of what you asked and the areas you care about, and starts the next visit with what changed. One click forgets it all.</p></div>
   <div class="card"><span class="pill amber">Knowledge risk</span><h3>See where knowledge is thin</h3><p>Areas with recent work that only one active person knows well.</p></div>
   <div class="card"><span class="pill">Under the hood</span><h3>Watch it think</h3><p>Every tool the agent picks and every Cypher query it runs streams in as it works, then the evidence graph.</p></div>
 </section>

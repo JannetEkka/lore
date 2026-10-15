@@ -45,9 +45,15 @@ function md(text) {
 
 // ---------- setup ----------
 async function init() {
-  const [projects, models] = await Promise.all([fetch('/api/projects').then((r) => r.json()), fetch('/api/models').then((r) => r.json())]);
+  const [projects, models, me] = await Promise.all([fetch('/api/projects').then((r) => r.json()), fetch('/api/models').then((r) => r.json()),
+    fetch('/api/me').then((r) => r.json())]);
+  state.me = me;
+  $('userbox').innerHTML = me.login
+    ? `<a class="btn small" href="https://github.com/${esc(me.login)}" target="_blank" rel="noopener">@${esc(me.login)}</a> <a class="btn small" href="/auth/logout">Sign out</a>`
+    : (me.signin ? '<a class="btn small primary" href="/auth/login">Sign in with GitHub</a>' : '');
   const want = new URLSearchParams(location.search).get('project');
-  $('project').innerHTML = projects.map((p) => `<option value="${esc(p.name)}">${esc(p.target)} (${p.stats.Person || 0} people, ${p.stats.PR || 0} PRs)</option>`).join('');
+  $('project').innerHTML = projects.map((p) => `<option value="${esc(p.name)}">${esc(p.target)} (${p.stats.Person || 0} people, ${p.stats.PR || 0} PRs)</option>`).join('')
+    + '<option value="__add">+ Add a project…</option>';
   if (want && projects.some((p) => p.name === want)) $('project').value = want;
   state.projects = projects;
   $('model').innerHTML = (models.models || []).map((m) => `<option>${esc(m)}</option>`).join('') || '<option value="">no models</option>';
@@ -58,7 +64,20 @@ async function init() {
   let toured = false; try { toured = !!localStorage.getItem('lore.toured'); } catch (e) {}
   if (!toured) tour(0);
 }
+function showPane(name) {
+  document.querySelectorAll('[data-pane]').forEach((p) => (p.hidden = p.dataset.pane !== name));
+  document.querySelectorAll('[data-tab]').forEach((x) => x.classList.toggle('on', x.dataset.tab === name));
+}
 function pickProject() {
+  if ($('project').value === '__add') {
+    $('project').value = state.project || $('project').options[0].value;
+    showPane('add'); state.mode = 'add';
+    if (!state.me?.login) {
+      $('addform').innerHTML = state.me?.signin ? '<a class="btn primary" href="/auth/login">Sign in with GitHub to add a project</a>'
+        : '<p class="muted">Sign-in isn\'t set up on this server, so projects can\'t be added here.</p>';
+    }
+    return;
+  }
   state.project = $('project').value;
   const p = state.projects.find((x) => x.name === state.project);
   $('fresh').textContent = p ? `data from ${new Date(p.fetched_at * 1000).toLocaleString()}` : '';
@@ -66,6 +85,8 @@ function pickProject() {
   $('chips').querySelectorAll('.chip').forEach((c) => (c.onclick = () => { $('question').value = c.textContent; ask(c.textContent, { suggested: true }); }));
   if (state.mode === 'triage') loadIssues();
   if (state.mode === 'risk') loadRisk();
+  if (state.mode === 'teams') loadTeams();
+  if (state.mode === 'memory') loadMemory();
 }
 
 // ---------- tabs ----------
@@ -75,6 +96,8 @@ document.querySelectorAll('[data-tab]').forEach((b) => (b.onclick = () => {
   state.mode = b.dataset.tab;
   if (state.mode === 'triage') loadIssues();
   if (state.mode === 'risk') loadRisk();
+  if (state.mode === 'teams') loadTeams();
+  if (state.mode === 'memory') loadMemory();
 }));
 document.querySelectorAll('[data-side]').forEach((b) => (b.onclick = () => side(b.dataset.side)));
 function side(name) {
@@ -161,7 +184,10 @@ async function ask(question, opts = {}) {
         const chunk = buf.slice(0, i); buf = buf.slice(i + 2);
         if (!chunk.startsWith('data: ')) continue;
         const e = JSON.parse(chunk.slice(6));
-        if (e.type === 'model') addStep('model', `Thinking with ${esc(e.model)}`);
+        if (e.type === 'memory') addStep('model', `Lore remembers @${esc(e.login)}`, e.asked
+          ? `${e.asked} earlier question(s)${e.interests.length ? '; interested in ' + esc(e.interests.join(', ')) : ''}${e.changed.length ? `; ${e.changed.length} PR(s) merged in those areas since the last visit` : ''}`
+          : 'First visit to this project: starting a memory.');
+        else if (e.type === 'model') addStep('model', `Thinking with ${esc(e.model)}`);
         else if (e.type === 'fallback') addStep('fallback', `${esc(e.from)} couldn't answer`, esc(e.reason) + ' · switching to the next free model');
         else if (e.type === 'replay') addStep('fallback', 'Saved answer', esc(e.message));
         else if (e.type === 'call') addStep('call', esc(TOOL_NAMES[e.tool] || e.tool), `${esc(e.tool)}(${esc(JSON.stringify(e.args))})`);
@@ -185,6 +211,48 @@ async function ask(question, opts = {}) {
     $('steps').querySelectorAll('.step.live').forEach((s) => s.classList.remove('live'));
   }
 }
+
+// ---------- teams, memory, adding a project ----------
+async function loadTeams() {
+  $('teamsbody').textContent = 'Running community detection…';
+  const r = await fetch(`/api/teams?project=${encodeURIComponent(state.project)}`).then((x) => x.json());
+  resetSteps(); r.trace.forEach((q) => addQuery(q, $('steps')));
+  $('teamsbody').innerHTML = r.teams.length ? r.teams.map((t, i) => `<div class="card" style="margin-bottom:12px">
+    <strong>Team ${i + 1}</strong> <span class="muted">· ${t.size} people</span>
+    <div class="chips">${t.members.map((m) => `<a class="chip" href="https://github.com/${esc(m.login)}" target="_blank" rel="noopener" title="PageRank ${m.centrality}">@${esc(m.login)}${m.active ? '' : ' (inactive)'}</a>`).join('')}</div>
+    <div class="muted" style="font-size:13px">Knows best: ${t.areas.map((a) => `<code>${esc(a.path)}</code> <span style="font-size:12px">(${esc(a.repo.split('/')[1] || a.repo)})</span>`).join(', ')}</div></div>`).join('')
+    : '<p class="muted">No strong review ties yet: nobody has reviewed the same person 5 times.</p>';
+}
+
+async function loadMemory() {
+  if (!state.me?.login) {
+    $('memorybody').innerHTML = `<p style="margin-top:0">Signed in, Lore remembers what you asked and which areas you care about, in a graph of its own for you. Next time it starts from there and tells you what changed since.</p>
+      ${state.me?.signin ? '<a class="btn primary" href="/auth/login">Sign in with GitHub</a>' : '<p class="muted">Sign-in isn\'t set up on this server.</p>'}`;
+    return;
+  }
+  const m = await fetch(`/api/memory?project=${encodeURIComponent(state.project)}`).then((x) => x.json());
+  $('memorybody').innerHTML = `<p style="margin-top:0">What Lore remembers about <strong>@${esc(state.me.login)}</strong> in this project. It lives in a separate graph just for you.${state.me.persistent ? '' : ' <span class="pill amber">This server forgets when it restarts.</span>'}</p>
+    <h4>Areas you care about</h4>${m.interests.length ? '<div class="chips">' + m.interests.map((i) => `<span class="chip">${esc(i.path)} · ${i.weight}×</span>`).join('') + '</div>' : '<p class="muted">None yet. Ask something.</p>'}
+    <h4>Since your last visit</h4>${m.changed.length ? '<ul>' + m.changed.map((c) => `<li><a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.id)}</a> ${esc(c.title)} <span class="muted">(${esc(c.area)})</span></li>`).join('') + '</ul>' : '<p class="muted">Nothing merged in your areas since then.</p>'}
+    <h4>Your recent questions</h4>${m.questions.length ? '<ul>' + m.questions.map((q) => `<li>${esc(q.text)} <span class="muted">${new Date(q.at * 1000).toLocaleString()}</span></li>`).join('') + '</ul>' : '<p class="muted">None yet.</p>'}
+    <button class="btn small" id="forgetbtn">Forget everything about me</button>`;
+  $('forgetbtn').onclick = async () => { if (confirm('Delete your whole memory graph?')) { await fetch('/api/memory', { method: 'DELETE' }); loadMemory(); } };
+}
+
+$('addbtn').onclick = async () => {
+  const target = $('addtarget').value.trim(); if (!target) return;
+  $('addlog').hidden = false; $('addlog').textContent = 'Starting…';
+  const r = await fetch('/api/projects/add', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ target }) });
+  const job = await r.json();
+  if (!r.ok) { $('addlog').textContent = job.detail || 'Failed.'; return; }
+  const poll = async () => {
+    const j = await fetch(`/api/projects/progress?name=${encodeURIComponent(job.name)}`).then((x) => x.json());
+    $('addlog').textContent = j.log.join('\n');
+    if (j.status === 'running') return setTimeout(poll, 1500);
+    if (j.status === 'done') { history.replaceState(null, '', `/app?project=${encodeURIComponent(job.name)}`); setTimeout(() => location.reload(), 1200); }
+  };
+  if (job.status === 'done') { location.href = `/app?project=${encodeURIComponent(job.name)}`; } else poll();
+};
 
 // ---------- proof graph ----------
 async function proof(ev) {

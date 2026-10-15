@@ -337,3 +337,35 @@ def recall_decisions(g, text, trace=None):
     trace = trace if trace is not None else Trace()
     words = [w for w in tokens(text)][:8]
     return trace.run(g, "recall_decisions", RECALL_DECISIONS, {"words": words}) if words else []
+
+
+# 7 and 8. Teams nobody drew, and who holds them together ------------------------------------------------
+
+TEAMS = """
+CALL algo.labelPropagation({nodeLabels: ['Person'], relationshipTypes: ['WORKS_CLOSELY']}) YIELD node, communityId
+WITH communityId, collect(node.login) AS members
+WHERE size(members) > 1
+RETURN communityId AS team, members ORDER BY size(members) DESC"""
+
+CENTRAL = """
+CALL algo.pageRank('Person', 'WORKS_WITH') YIELD node, score
+RETURN node.login AS login, score, node.active AS active"""
+
+TEAM_AREAS = """
+MATCH (p:Person)-[k:KNOWS]->(a:Area) WHERE p.login IN $members
+RETURN a.path AS path, a.repo AS repo, sum(k.score) AS score ORDER BY score DESC LIMIT 4"""
+
+
+def teams(g, trace=None):
+    """Community detection over strong review ties (TEAM_MIN_REVIEWS or more between two people): the teams that
+    actually work together, each with the people at its centre (PageRank over all review ties) and its best-known areas."""
+    trace = trace if trace is not None else Trace()
+    rank = {r["login"]: r for r in trace.run(g, "pagerank", CENTRAL)}
+    out = []
+    for t in trace.run(g, "label_propagation", TEAMS):
+        members = sorted(t["members"], key=lambda m: rank.get(m, {}).get("score", 0), reverse=True)
+        out.append({"team": t["team"], "size": len(members),
+                    "members": [{"login": m, "centrality": round(rank.get(m, {}).get("score", 0), 3),
+                                 "active": bool(rank.get(m, {}).get("active"))} for m in members],
+                    "areas": trace.run(g, f"team_areas:{t['team']}", TEAM_AREAS, {"members": members})})
+    return out

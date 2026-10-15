@@ -3,7 +3,7 @@ import time
 from collections import defaultdict
 
 from .areas import VENDORED, assign, plan_areas
-from .config import ACTIVE_DAYS, DECAY_K, W_AUTHOR, W_COMMENT, W_REVIEW
+from .config import ACTIVE_DAYS, DECAY_K, TEAM_MIN_REVIEWS, W_AUTHOR, W_COMMENT, W_REVIEW
 
 INDEXES = [
     ("Person", "login"), ("Repo", "name"), ("Area", "id"), ("File", "id"),
@@ -11,7 +11,7 @@ INDEXES = [
 ]
 
 # Bump when loading changes what ends up in the graph, so saved graphs are rebuilt.
-LOADER_VERSION = 2
+LOADER_VERSION = 3
 
 REVIEW_RANK = {"APPROVED": 3, "CHANGES_REQUESTED": 2, "COMMENTED": 1, "DISMISSED": 0}
 
@@ -179,7 +179,7 @@ KNOWS_FROM = {
 }
 
 
-def compute_knows(g, now=None):
+def compute_knows(g, now=None, team_min=TEAM_MIN_REVIEWS):
     now = now or int(time.time())
     g.query("MATCH (:Person)-[k:KNOWS]->(:Area) DELETE k")
     for kind, (weight, match) in KNOWS_FROM.items():
@@ -191,3 +191,12 @@ def compute_knows(g, now=None):
                          k.last_at = CASE WHEN last > k.last_at THEN last ELSE k.last_at END""",
                 {"w": weight, "k": DECAY_K, "now": now})
     g.query("MATCH (p:Person) SET p.active = p.last_active >= $cutoff", {"cutoff": now - ACTIVE_DAYS * 86400})
+    # Who works with whom: every review links reviewer and author, both ways, weighted by how often.
+    g.query("MATCH (:Person)-[w:WORKS_WITH]->(:Person) DELETE w")
+    g.query("""MATCH (r:Person)-[:REVIEWED]->(pr:PR)<-[:AUTHORED]-(a:Person) WHERE r <> a
+               WITH r, a, count(pr) AS n
+               MERGE (r)-[w1:WORKS_WITH]->(a) ON CREATE SET w1.weight = n ON MATCH SET w1.weight = w1.weight + n
+               MERGE (a)-[w2:WORKS_WITH]->(r) ON CREATE SET w2.weight = n ON MATCH SET w2.weight = w2.weight + n""")
+    # Only strong ties go into community detection: across a whole org almost everyone reviews someone.
+    g.query("MATCH (:Person)-[c:WORKS_CLOSELY]->(:Person) DELETE c")
+    g.query("MATCH (a:Person)-[w:WORKS_WITH]->(b:Person) WHERE w.weight >= $t CREATE (a)-[:WORKS_CLOSELY]->(b)", {"t": team_min})

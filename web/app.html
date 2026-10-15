@@ -14,6 +14,7 @@
   <label id="t-model">Model <select id="model"></select></label>
   <span class="muted" id="fresh" style="font-size:12.5px"></span>
   <span class="spacer"></span>
+  <span id="userbox"></span>
   <button class="btn small" id="keybtn" title="Use your own free Gemini key">Own key</button>
   <button class="btn small" id="helpbtn">How to use</button>
   <a class="btn small" href="/how">How it works</a>
@@ -26,6 +27,8 @@
       <button class="tab" data-tab="triage">Triage an issue</button>
       <button class="tab" data-tab="first">First contribution</button>
       <button class="tab" data-tab="risk">Knowledge risk</button>
+      <button class="tab" data-tab="teams">Teams</button>
+      <button class="tab" data-tab="memory">My memory</button>
     </div>
 
     <div class="panel" data-pane="ask">
@@ -59,6 +62,25 @@
     <div class="panel" data-pane="risk" hidden>
       <p style="margin-top:0">Areas with at least 3 merged PRs in the last 180 days that at most one active person knows well. Not a judgement of anyone: a map of where help would spread knowledge.</p>
       <div id="riskbody" class="muted">Loading…</div>
+    </div>
+
+    <div class="panel" data-pane="teams" hidden>
+      <p style="margin-top:0">The teams that actually work together, found by community detection over who reviews whom (at least 5 reviews between two people). Within each team, people are ordered by PageRank over all review ties.</p>
+      <div id="teamsbody" class="muted">Loading…</div>
+    </div>
+
+    <div class="panel" data-pane="memory" hidden>
+      <div id="memorybody" class="muted">Loading…</div>
+    </div>
+
+    <div class="panel" data-pane="add" hidden>
+      <h3 style="margin-top:0">Add a project</h3>
+      <p class="muted" style="margin-top:0">Any public GitHub org (<code>FalkorDB</code>) or repo (<code>owner/repo</code>). Lore reads the last 12 months (up to 3 repos, 300 PRs each) with your GitHub allowance, builds its graph, and opens it here. Only public data is read.</p>
+      <div id="addform" style="display:flex;gap:8px">
+        <input id="addtarget" class="field" style="min-height:0" placeholder="owner/repo or an org name">
+        <button class="btn primary" id="addbtn">Build its graph</button>
+      </div>
+      <pre id="addlog" hidden></pre>
     </div>
 
     <div class="panel answer" id="answer" hidden>

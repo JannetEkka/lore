@@ -9,6 +9,7 @@ W_COMMENT = 0.2   # commented on a PR, or on an issue a PR then fixed
 
 HALF_LIFE_DAYS = 180   # work this old counts half
 ACTIVE_DAYS = 90       # "active" = any activity in the project in this many days
+TEAM_MIN_REVIEWS = 5   # two people "work closely" after this many reviews between them (Teams view)
 AREA_DEPTH = 2         # an area is the first two directories of a path: src/index/x.c -> src/index
 
 # Exponent for the recency decay: weight * exp(DECAY_K * age_in_seconds) halves every HALF_LIFE_DAYS.

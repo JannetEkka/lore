@@ -70,3 +70,25 @@ def test_knowledge_risk_flags_areas_one_person_knows(graph):
     by_path = {r["path"]: r["knowers"] for r in risky}
     assert by_path.get("docs") == ["carol"]
     assert "src/index" not in by_path and "src/parser" not in by_path
+
+
+def test_teams_group_people_who_review_each_other(graph):
+    from lore.load import compute_knows
+    compute_knows(graph, NOW, team_min=1)  # the fixture has one review per pair
+    teams = queries.teams(graph)
+    tied = {r[0] for r in graph.query("MATCH (p:Person)-[:WORKS_CLOSELY]->() RETURN DISTINCT p.login").result_set}
+    assert teams and all(t["size"] >= 2 and t["areas"] for t in teams)
+    assert {m["login"] for t in teams for m in t["members"]} <= tied  # only people with review ties form teams
+
+
+def test_memory_is_one_graph_per_user(database, graph, monkeypatch):
+    from lore import memory
+    monkeypatch.setattr(memory.db, "connect", lambda path=None: database)
+    memory.forget("erin")
+    memory.remember("erin", "acme__db", "Who knows the index?", "@alice", [{"id": "acme/db:src/index", "path": "src/index"}], now=NOW - 30 * 86400)
+    memory.mark_seen("erin", "acme__db", now=NOW - 30 * 86400)
+    note, mem, changed = memory.context("erin", "acme__db", graph)
+    assert mem["interests"][0]["path"] == "src/index" and "Who knows the index?" in note
+    assert [c["id"] for c in changed] == ["acme/db#10"]  # merged 10 days ago, after the last visit
+    memory.forget("erin")
+    assert memory.recall("erin", "acme__db")["questions"] == []
