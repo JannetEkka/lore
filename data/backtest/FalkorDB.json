@@ -1,0 +1,6288 @@
+{
+ "days": 365,
+ "prs": 300,
+ "llm_model": "gemini-3.8-flash",
+ "summary": {
+  "lore": {
+   "n": 300,
+   "top1": 0.573,
+   "top3": 0.903
+  },
+  "frequent": {
+   "n": 300,
+   "top1": 0.61,
+   "top3": 0.88
+  },
+  "recent": {
+   "n": 300,
+   "top1": 0.433,
+   "top3": 0.643
+  },
+  "llm": {
+   "n": 0,
+   "top1": null,
+   "top3": null
+  }
+ },
+ "examples": [
+  {
+   "pr": "FalkorDB/QueryWeaver#811",
+   "title": "perf: install falkordb with the hiredis extra",
+   "reviewers": [
+    "Naseem77"
+   ],
+   "lore": [
+    "barakb",
+    "gkorland",
+    "Anchel123"
+   ],
+   "frequent": [
+    "barakb",
+    "gkorland",
+    "Anchel123"
+   ],
+   "recent": [
+    "barakb",
+    "Anchel123",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#343",
+   "title": "perf: depend on falkordb[hiredis] for faster reply parsing",
+   "reviewers": [
+    "Naseem77"
+   ],
+   "lore": [
+    "Naseem77",
+    "gkorland",
+    "dudizimber"
+   ],
+   "frequent": [
+    "Naseem77",
+    "gkorland",
+    "mikemikimike"
+   ],
+   "recent": [
+    "Naseem77",
+    "gkorland",
+    "mikemikimike"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-py#305",
+   "title": "chore(release): 1.8.0",
+   "reviewers": [
+    "Naseem77"
+   ],
+   "lore": [
+    "gkorland",
+    "swilly22",
+    "Naseem77"
+   ],
+   "frequent": [
+    "swilly22",
+    "gkorland",
+    "AviAvni"
+   ],
+   "recent": [
+    "Naseem77",
+    "gkorland",
+    "swilly22"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-py#304",
+   "title": "feat: add optional hiredis extra for faster reply parsing",
+   "reviewers": [
+    "swilly22"
+   ],
+   "lore": [
+    "gkorland",
+    "swilly22",
+    "Naseem77"
+   ],
+   "frequent": [
+    "swilly22",
+    "gkorland",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "gkorland",
+    "swilly22"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2147",
+   "title": "fix: address review comments on the staging PR (#2146)",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "frequent": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "Naseem77",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3339",
+   "title": "fix: bound value nesting on RDB/RESTORE decode, property writes and bulk insert",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "yzxcj797",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2145",
+   "title": "chore: update version to 2.7.0 in package.json and package-lock.json",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2144",
+   "title": "Feat/whats new",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3328",
+   "title": "fix: parse module-load arguments like C (case-insensitive, validated, refused on bad input)",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3307",
+   "title": "perf(index): apply native-index writes once per unit of work",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "gkorland",
+    "swilly22"
+   ],
+   "frequent": [
+    "AviAvni",
+    "GomezGab",
+    "swilly22"
+   ],
+   "recent": [
+    "AviAvni",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3290",
+   "title": "fix: an inline write no longer fails while a queued write is matching",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3262",
+   "title": "fix: give graphs loaded from an RDB the configured CACHE_SIZE",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3234",
+   "title": "fix: slow log no longer panics on a multi-byte character at byte 2048",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "gkorland",
+    "swilly22"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2140",
+   "title": "chore(deps): combine open Dependabot updates",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "Balance8"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2139",
+   "title": "feat: desktop and mobile apps, with an OS-aware \"Get the app\" in the browser",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2138",
+   "title": "fix: bump version to 2.6.2",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2137",
+   "title": "fix: address review comments on the staging PR",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2136",
+   "title": "feat: let the user view the graph in 3D",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2128",
+   "title": "feat: match canvas search text anywhere in a property value",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3192",
+   "title": "ci(backport): read every search result in batch-backport",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "gkorland",
+    "dudizimber"
+   ],
+   "frequent": [
+    "AviAvni",
+    "GomezGab",
+    "swilly22"
+   ],
+   "recent": []
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3181",
+   "title": "build(docker): run redis-server as the falkordb user",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "gkorland",
+    "swilly22"
+   ],
+   "frequent": [
+    "AviAvni",
+    "GomezGab",
+    "swilly22"
+   ],
+   "recent": [
+    "AviAvni"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3179",
+   "title": "ci: port master's Trivy image scan; drop util-linux from the runtime image",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "gkorland",
+    "dudizimber"
+   ],
+   "frequent": [
+    "AviAvni",
+    "GomezGab",
+    "swilly22"
+   ],
+   "recent": [
+    "AviAvni"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#575",
+   "title": "docs: fix \\u2019 apostrophes",
+   "reviewers": [
+    "gkorland"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "Anchel123"
+   ],
+   "frequent": [
+    "gkorland",
+    "shahar-biron",
+    "swilly22"
+   ],
+   "recent": [
+    "gkorland",
+    "Anchel123"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2124",
+   "title": "fix(deps): bump sharp to 0.35.5 (CVE-2026-96889)",
+   "reviewers": [
+    "barakb",
+    "dudizimber"
+   ],
+   "lore": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3170",
+   "title": "build(native-deps): include <string> in VecSim's vec_utils.cpp for libc++ 23",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni"
+   ],
+   "frequent": [
+    "AviAvni",
+    "GomezGab",
+    "swilly22"
+   ],
+   "recent": []
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2122",
+   "title": "fix: address staging release review and take the npm-all bump",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "JSap0914"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3163",
+   "title": "ci: move the toolchain to LLVM 23",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "dudizimber"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3161",
+   "title": "fix(rdb): save virtual keys as graphmeta so C keeps graphs in GRAPH.LIST",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "recent": [
+    "gkorland",
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3153",
+   "title": "ci(images): rebuild the OS-package stages on every image build",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "AviAvni",
+    "gkorland",
+    "dudizimber"
+   ],
+   "frequent": [
+    "AviAvni",
+    "GomezGab",
+    "swilly22"
+   ],
+   "recent": [
+    "AviAvni"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2120",
+   "title": "feat(tabs): share by copying the address bar instead of a copy-link button",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2119",
+   "title": "fix(tabs): a share link opens on a first visit instead of the tutorial",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "dudizimber",
+    "shahar-biron"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2117",
+   "title": "chore(version): update version to 2.6.0",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "Balance8"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2116",
+   "title": "feat(tabs): shareable links that open a tab's graph and query anywhere",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3132",
+   "title": "fix(runtime): allow startNode() and endNode() to accept null (#2723)",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "DvirDukhan",
+    "gkorland"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "AviAvni",
+    "GomezGab"
+   ],
+   "recent": [
+    "olifarhaan",
+    "AviAvni",
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3127",
+   "title": "fix(functions): name received types in the engine's vocabulary in entity.rs",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "DvirDukhan",
+    "gkorland"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "AviAvni",
+    "GomezGab"
+   ],
+   "recent": [
+    "olifarhaan",
+    "AviAvni",
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3125",
+   "title": "fix(temporal): reject non-digits in compact date and time strings",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "DvirDukhan",
+    "gkorland"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "AviAvni",
+    "GomezGab"
+   ],
+   "recent": [
+    "AviAvni",
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3113",
+   "title": "fix: charge 1 per relationship in algo.SPpaths/SSpaths without costProp (#3109)",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "swilly22"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3104",
+   "title": "fix: stop exponential backtracking on nested [(...)] lists in the parser",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "yzxcj797"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3102",
+   "title": "fix: plan a self-loop hop after the hop that binds its node",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "yzxcj797"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3094",
+   "title": "fix: validate index OPTIONS like C (vector dimension/similarityFunction required, case-insensitive metric, unknown fulltext keys rejected)",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3088",
+   "title": "fix: clamp k in vector KNN queries instead of allocating k entries",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3087",
+   "title": "fix: a wrong-dimension vector no longer drops the entity from every index on its label",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3081",
+   "title": "fix: range index scans include \u00b1inf for an open bound and emit undirected edges both ways",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "gkorland",
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3079",
+   "title": "fix: define the graph global in the UDF validation context",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3076",
+   "title": "fix: don't index temporals in the range index's numeric field",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "gkorland",
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3074",
+   "title": "fix: UDF results keep -0.0, constructor-keyed maps and non-finite vecf32",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3072",
+   "title": "fix: an exclusive string range with equal bounds selects nothing",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "gkorland",
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3060",
+   "title": "fix: parser accepts invalid / rejects valid syntax (NOT NOT, SET [n), f(1,), MATCH MATCH, LOAD CSV WITH, IS NULL IN)",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "yzxcj797"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3053",
+   "title": "fix: GRAPH.MEMORY accepts SAMPLES 0; GRAPH.CONSTRAINT parses entity type and count as C",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3022",
+   "title": "fix: refuse GRAPH.EFFECT records that act on entities that are not live",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "yzxcj797"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3021",
+   "title": "fix: GRAPH.CONFIG validates values, arity and names as C does",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "swilly22",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3014",
+   "title": "fix: never hang when >1024 queries are queued; MAX_QUEUED_QUERIES bounds every queued query",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "swilly22",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3010",
+   "title": "fix: one C-compatible flag parser for QUERY/RO_QUERY/PROFILE/EXPLAIN",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "gkorland",
+    "DvirDukhan",
+    "GomezGab"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#3000",
+   "title": "fix: honour the per-query TIMEOUT for writes once TIMEOUT_MAX/TIMEOUT_DEFAULT is set",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2990",
+   "title": "fix: reject coalesce() with zero arguments like C",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "olifarhaan",
+    "DvirDukhan",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2989",
+   "title": "fix: toInteger of an integer string below i64::MIN is null, not i64::MIN",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "olifarhaan",
+    "DvirDukhan",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2952",
+   "title": "fix: clamp list.remove's span end instead of overflowing on a huge count",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "yzxcj797"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2944",
+   "title": "test(slowlog): populate the slowlog serially",
+   "reviewers": [
+    "swilly22"
+   ],
+   "lore": [
+    "AviAvni",
+    "gkorland",
+    "GomezGab"
+   ],
+   "frequent": [
+    "AviAvni",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "gkorland",
+    "AviAvni",
+    "swilly22"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2921",
+   "title": "fix(info): stop INFO reporting RediSearch's version as graph_version; Redis 8.10.2",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "gkorland",
+    "swilly22"
+   ],
+   "frequent": [
+    "AviAvni",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "AviAvni",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2920",
+   "title": "fix: start a decoded IdList's run after its last segment",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "yzxcj797"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2917",
+   "title": "fix: match C for map <>, NaN grouping and min/max over NaN (#2913)",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "yzxcj797",
+    "olifarhaan",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2916",
+   "title": "fix: refuse effect records the v3 reader would reject at encode time",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "yzxcj797"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2912",
+   "title": "fix: give ORDER BY a real total order so sorting never panics (#2891)",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "yzxcj797",
+    "gkorland",
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2911",
+   "title": "fix: refuse GRAPH.EFFECT ids no matrix can hold before sizing to them",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2910",
+   "title": "fix: lex CRLF, 0e5, any spelling of 2^63 and strict \\u escapes like C",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "yzxcj797"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2908",
+   "title": "fix: end block comments at */ and stop swallowing a lone /",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "yzxcj797"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2907",
+   "title": "fix: sign() of a Float returns an Integer",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "yzxcj797"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2882",
+   "title": "ci(release): move Docker Hub :latest to the Rust image on release",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "gkorland",
+    "dudizimber"
+   ],
+   "frequent": [
+    "AviAvni",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": []
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2108",
+   "title": "refactor: source the shared primitives from @falkordb/ui",
+   "reviewers": [
+    "barakb",
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2874",
+   "title": "fix: pattern comprehensions everywhere \u2014 no crashes, nested plans for loop variables (#2308)",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "olifarhaan",
+    "gkorland",
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2873",
+   "title": "ci(asan): get llvm-symbolizer from the builder, not apt.llvm.org",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2867",
+   "title": "feat(effects): let v3 index records name several schema entities",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "gkorland",
+    "GomezGab"
+   ],
+   "frequent": [
+    "AviAvni",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2847",
+   "title": "fix(effects/v3): end a run when a segment reads against it",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "gkorland"
+   ],
+   "frequent": [
+    "AviAvni",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": []
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2846",
+   "title": "refactor(graph): make IdSpace the id allocation authority",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "gkorland",
+    "swilly22"
+   ],
+   "frequent": [
+    "AviAvni",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "gkorland",
+    "AviAvni"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2845",
+   "title": "fix: give every CALL {} body its entry projection as a record boundary",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2103",
+   "title": "chore(deps): bump the npm-all group and sharp (14 updates)",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2102",
+   "title": "feat(auth): support a preconfigured connection that signs in automatically",
+   "reviewers": [
+    "barakb",
+    "dudizimber"
+   ],
+   "lore": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "frequent": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "JSap0914",
+    "hoijui"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2101",
+   "title": "fix(tutorial): drop leftover demo graphs before re-creating them",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "frequent": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "dudizimber",
+    "shahar-biron"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2099",
+   "title": "fix(cypher): parse LOAD CSV and VECTOR INDEX, and catch unrunnable CSV sources",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "frequent": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "hoijui"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2097",
+   "title": "fix(security): parameterise Cypher inputs, bind ciphertext to its owner, drop the baked AUTH_SECRET",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "frequent": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "JSap0914"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2833",
+   "title": "fix: identify virtual keys the way the C engine does",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "swilly22",
+    "gkorland"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2829",
+   "title": "fix(planner): materialize named paths created by CREATE (#1279)",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "DvirDukhan",
+    "gkorland"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "AviAvni",
+    "GomezGab"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "AviAvni"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2094",
+   "title": "feat(mobile): responsive layout for viewports under 1100px",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "frequent": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "dudizimber",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2824",
+   "title": "chore(deps): combined dependabot bumps (lru, rquickjs, zstd, smallvec, codeql-action, amazonlinux, bench-deps)",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "dudizimber"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2823",
+   "title": "ci: bump cargo-fuzz to 0.13.2 so the fuzz job can install it",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "dudizimber",
+    "gkorland"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2797",
+   "title": "fix(graph): allocate ids against the set the caller holds, not a count of it",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "gkorland",
+    "swilly22"
+   ],
+   "frequent": [
+    "AviAvni",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "gkorland",
+    "AviAvni"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2789",
+   "title": "Fix Value Hash Join matching join keys that contain NULL",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "DvirDukhan",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "AviAvni",
+    "GomezGab"
+   ],
+   "recent": [
+    "AviAvni",
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2788",
+   "title": "fix: keep a label that is re-added in the same query that removes it",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "DvirDukhan",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "AviAvni",
+    "GomezGab"
+   ],
+   "recent": [
+    "AviAvni",
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2787",
+   "title": "fix(constraint): composite UNIQUE is vacuously satisfied when any property is NULL",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "DvirDukhan",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "AviAvni",
+    "GomezGab"
+   ],
+   "recent": [
+    "AviAvni",
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2785",
+   "title": "fix(graph): clear adjacency when an edge dies with both endpoints",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "DvirDukhan",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "AviAvni",
+    "GomezGab"
+   ],
+   "recent": [
+    "AviAvni",
+    "DvirDukhan",
+    "GomezGab"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2765",
+   "title": "test(slowlog): match the displacing query to the shape it must outrank",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "AviAvni",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "AviAvni"
+   ],
+   "recent": [
+    "AviAvni",
+    "DvirDukhan",
+    "swilly22"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2757",
+   "title": "perf: size a scan's first batch to the downstream LIMIT",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2754",
+   "title": "feat(effects): the v3 wire codec",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "gkorland",
+    "swilly22"
+   ],
+   "frequent": [
+    "GomezGab",
+    "AviAvni",
+    "gkorland"
+   ],
+   "recent": [
+    "AviAvni"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#328",
+   "title": "feat(structured): tables declared on the ontology, one node for a row and its prose mention",
+   "reviewers": [
+    "Naseem77"
+   ],
+   "lore": [
+    "Naseem77",
+    "gkorland",
+    "mikemikimike"
+   ],
+   "frequent": [
+    "Naseem77",
+    "barakb",
+    "mikemikimike"
+   ],
+   "recent": [
+    "gkorland",
+    "lingmao233",
+    "mikemikimike"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#327",
+   "title": "Deduplication: LLM-judged cross-document dedup in finalize() \u2014 nominate, group, judge twice, merge or link",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "gkorland",
+    "mikemikimike"
+   ],
+   "frequent": [
+    "galshubeli",
+    "barakb",
+    "mikemikimike"
+   ],
+   "recent": [
+    "gkorland",
+    "mikemikimike",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#326",
+   "title": "Deduplication: LLMVerifiedResolution rework \u2014 unified candidates, batching, family gate, second vote (opt-in)",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "mikemikimike",
+    "gkorland"
+   ],
+   "frequent": [
+    "galshubeli",
+    "barakb",
+    "mikemikimike"
+   ],
+   "recent": [
+    "mikemikimike",
+    "galshubeli",
+    "drr00t"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#325",
+   "title": "Deduplication: every merge keeps all descriptions and labels; ingest resolves with exact match only",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "mikemikimike",
+    "gkorland"
+   ],
+   "frequent": [
+    "galshubeli",
+    "barakb",
+    "mikemikimike"
+   ],
+   "recent": [
+    "galshubeli",
+    "drr00t",
+    "shahar-biron"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#324",
+   "title": "Deduplication: remove the unreachable SemanticResolution and DescriptionMergeResolution",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "gkorland",
+    "mikemikimike"
+   ],
+   "frequent": [
+    "galshubeli",
+    "barakb",
+    "mikemikimike"
+   ],
+   "recent": [
+    "gkorland",
+    "mikemikimike",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#323",
+   "title": "Deduplication: finalize-time deduplicator fixes \u2014 ghost nodes, kept descriptions, name normalisation, acronyms",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "gkorland",
+    "mikemikimike"
+   ],
+   "frequent": [
+    "galshubeli",
+    "barakb",
+    "mikemikimike"
+   ],
+   "recent": [
+    "gkorland",
+    "mikemikimike",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#322",
+   "title": "Extraction: SpacyExtractor and CompositeExtractor as opt-in NER backends",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "mikemikimike",
+    "gkorland"
+   ],
+   "frequent": [
+    "galshubeli",
+    "barakb",
+    "mikemikimike"
+   ],
+   "recent": [
+    "galshubeli"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#321",
+   "title": "Extraction: default relation vocabulary and no early stop in relation extraction",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "gkorland",
+    "mikemikimike"
+   ],
+   "frequent": [
+    "galshubeli",
+    "barakb",
+    "mikemikimike"
+   ],
+   "recent": [
+    "gkorland",
+    "mikemikimike",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#320",
+   "title": "Extraction: GLiNER windows over long chunks, per-model thresholds, 'Unknown' band",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "gkorland",
+    "mikemikimike"
+   ],
+   "frequent": [
+    "galshubeli",
+    "barakb",
+    "mikemikimike"
+   ],
+   "recent": [
+    "dudizimber",
+    "galshubeli"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#319",
+   "title": "Extraction: dates, acronyms, junk tokens and reserved labels \u2014 entity-name hygiene",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "mikemikimike",
+    "gkorland"
+   ],
+   "frequent": [
+    "galshubeli",
+    "barakb",
+    "mikemikimike"
+   ],
+   "recent": [
+    "dudizimber",
+    "galshubeli",
+    "drr00t"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#318",
+   "title": "Extraction: share one GLiNER model, drop the inference lock, index ids, report failed chunks",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "mikemikimike",
+    "gkorland"
+   ],
+   "frequent": [
+    "galshubeli",
+    "barakb",
+    "mikemikimike"
+   ],
+   "recent": [
+    "dudizimber",
+    "galshubeli",
+    "drr00t"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2081",
+   "title": "fix: bump version to 2.5.2 in package.json and package-lock.json",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2718",
+   "title": "ci: make PR CI fork-safe and gate main on a merge queue",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "gkorland",
+    "swilly22"
+   ],
+   "frequent": [
+    "AviAvni",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "AviAvni",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2079",
+   "title": "fix: enhance Trivy scanner configuration for multi-architecture support",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "Naseem77",
+    "shahar-biron",
+    "barakb"
+   ],
+   "frequent": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "MuhammadQadora"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2078",
+   "title": "fix(chat): keep CYPHER keyword on parameter headers in displayed queries",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "Anchel123",
+    "shahar-biron",
+    "barakb"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Anchel123"
+   ],
+   "recent": [
+    "Anchel123",
+    "barakb",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2712",
+   "title": "perf: call a scalar function once per batch when all its arguments are constant",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2075",
+   "title": "fix: release 2.5.1 and clear the open staging review findings",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2708",
+   "title": "perf(aggregate): stop allocating a grouping key per input row",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "DvirDukhan"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "AviAvni"
+   ],
+   "recent": [
+    "AviAvni",
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2704",
+   "title": "test(effects): one harness, one file per question",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "swilly22",
+    "GomezGab"
+   ],
+   "frequent": [
+    "GomezGab",
+    "AviAvni",
+    "gkorland"
+   ],
+   "recent": [
+    "AviAvni",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2695",
+   "title": "build: replace graphblas.sh/redisearch.sh with a native-deps crate",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "gkorland",
+    "swilly22"
+   ],
+   "frequent": [
+    "AviAvni",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "AviAvni",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2693",
+   "title": "perf: keep the columnar aggregate path when a key or argument is computed",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2691",
+   "title": "perf: page the edge-endpoint index so a write copies a page, not the tier",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2690",
+   "title": "perf: keep a hash-join build slot inline instead of a Vec per key",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2686",
+   "title": "perf: lend LAGraph the adjacency matrix instead of duplicating it",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2685",
+   "title": "perf: answer n:Label as a column instead of a value per row",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#557",
+   "title": "fix(redirects): add redirects for legacy memory-usage and migration URLs",
+   "reviewers": [
+    "gkorland"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "Anchel123"
+   ],
+   "frequent": [
+    "gkorland",
+    "shahar-biron",
+    "swilly22"
+   ],
+   "recent": [
+    "Anchel123"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#315",
+   "title": "docs: consolidate hallucination-reduction and grounding docs (supersedes #311, #312, #314)",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "Naseem77",
+    "mikemikimike"
+   ],
+   "frequent": [
+    "galshubeli",
+    "Naseem77",
+    "mikemikimike"
+   ],
+   "recent": [
+    "lingmao233",
+    "mikemikimike",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#745",
+   "title": "fix: render the assistant answer as markdown",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "barakb",
+    "Naseem77"
+   ],
+   "frequent": [
+    "galshubeli",
+    "gkorland",
+    "barakb"
+   ],
+   "recent": [
+    "galshubeli",
+    "Naseem77",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2678",
+   "title": "perf: drop all_nodes_matrix, the graph no longer needs a matrix of live nodes",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "swilly22",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "GomezGab"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2675",
+   "title": "bench: order the sized rows by magnitude so the creates measure creates",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2674",
+   "title": "perf: reuse one iterator pair per type when cascading deleted nodes' edges",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "GomezGab"
+   ]
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#736",
+   "title": "feat: verify email addresses before creating an account",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "barakb",
+    "gkorland"
+   ],
+   "frequent": [
+    "galshubeli",
+    "gkorland",
+    "barakb"
+   ],
+   "recent": [
+    "galshubeli",
+    "barakb",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#556",
+   "title": "docs(browser): update Browser docs and screenshots for v2.5.0",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "dudizimber"
+   ],
+   "frequent": [
+    "gkorland",
+    "shahar-biron",
+    "dudizimber"
+   ],
+   "recent": [
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2642",
+   "title": "perf: snapshot a deleted node's edges from its own adjacency, not a full scan",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "GomezGab"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2641",
+   "title": "perf: find reclaimable ids by rank instead of walking to them",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2640",
+   "title": "fix: DELETE of an edge created in the same query on a recycled id",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "GomezGab"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#309",
+   "title": "Chunking: idempotent re-ingest and a measured 384-token default",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "mikemikimike",
+    "drr00t"
+   ],
+   "frequent": [
+    "galshubeli",
+    "mikemikimike",
+    "barakb"
+   ],
+   "recent": [
+    "mikemikimike",
+    "dudizimber",
+    "galshubeli"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2636",
+   "title": "fix: handle a NUL byte the way C does \u2014 names and queries end at the first one",
+   "reviewers": [
+    "gkorland"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "swilly22",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2628",
+   "title": "perf(runtime): evaluate whole expression trees column at a time",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "gkorland",
+    "swilly22"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2624",
+   "title": "fix(#2582): make the filter comparison kernels answer what the evaluator answers",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#735",
+   "title": "chore(deps): batch the eight low-risk Dependabot bumps",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "barakb",
+    "galshubeli",
+    "gkorland"
+   ],
+   "frequent": [
+    "galshubeli",
+    "gkorland",
+    "barakb"
+   ],
+   "recent": [
+    "Naseem77",
+    "gkorland",
+    "barakb"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2622",
+   "title": "fix: nested index scans could freeze the whole server; track RediSearch as a deps/ submodule",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "dudizimber"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "GomezGab",
+    "gkorland"
+   ],
+   "recent": [
+    "gkorland",
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#554",
+   "title": "Extend meta tags in documentation for improved SEO",
+   "reviewers": [
+    "gkorland"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "dragnot"
+   ],
+   "frequent": [
+    "gkorland",
+    "shahar-biron",
+    "swilly22"
+   ],
+   "recent": []
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#733",
+   "title": "fix(ui): sidebar toggle, inert menu links and schema panel sizing",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "barakb",
+    "Naseem77"
+   ],
+   "frequent": [
+    "galshubeli",
+    "gkorland",
+    "barakb"
+   ],
+   "recent": [
+    "barakb",
+    "galshubeli",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2071",
+   "title": "chore(deps): consolidate dependency updates",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#304",
+   "title": "docs: add missing examples 06, 08-10 to README examples table",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "Naseem77",
+    "mikemikimike"
+   ],
+   "frequent": [
+    "galshubeli",
+    "Naseem77",
+    "mikemikimike"
+   ],
+   "recent": [
+    "dudizimber",
+    "gkorland",
+    "galshubeli"
+   ]
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#720",
+   "title": "ci: split E2E tests into AI and non-AI groups",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "barakb",
+    "gkorland"
+   ],
+   "frequent": [
+    "galshubeli",
+    "gkorland",
+    "barakb"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "galshubeli"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2606",
+   "title": "fix: element-wise Vectorf32 equality in compare_value",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "DvirDukhan",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "AviAvni",
+    "GomezGab"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#303",
+   "title": "ci: add explicit read-only permissions to ci.yml workflow",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "Naseem77",
+    "dudizimber"
+   ],
+   "frequent": [
+    "galshubeli",
+    "Naseem77",
+    "mikemikimike"
+   ],
+   "recent": [
+    "Naseem77",
+    "galshubeli"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#302",
+   "title": "fix(deps): raise dependency floors to patched versions for Dependabot alerts",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "Naseem77",
+    "dudizimber"
+   ],
+   "frequent": [
+    "galshubeli",
+    "Naseem77",
+    "mikemikimike"
+   ],
+   "recent": [
+    "dudizimber",
+    "galshubeli",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2598",
+   "title": "ci(security): gate artifact-build caches on a trusted revision",
+   "reviewers": [
+    "dudizimber"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "AviAvni",
+    "dudizimber"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "AviAvni",
+    "GomezGab"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#719",
+   "title": "feat: make browser login independent of FalkorDB",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "barakb",
+    "gkorland"
+   ],
+   "frequent": [
+    "galshubeli",
+    "gkorland",
+    "barakb"
+   ],
+   "recent": [
+    "Naseem77",
+    "gkorland",
+    "barakb"
+   ]
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#718",
+   "title": "fix: frame schema tables by rendered size when zooming",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "Naseem77",
+    "barakb"
+   ],
+   "frequent": [
+    "galshubeli",
+    "gkorland",
+    "barakb"
+   ],
+   "recent": [
+    "barakb",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2067",
+   "title": "feat: hide user management for LDAP-backed enterprise connections",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "dudizimber",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2065",
+   "title": "feat: enhance date validation and improve tutorial step handling",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "gkorland",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#715",
+   "title": "Query highlighting",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "barakb",
+    "Naseem77"
+   ],
+   "frequent": [
+    "galshubeli",
+    "gkorland",
+    "barakb"
+   ],
+   "recent": [
+    "Naseem77",
+    "gkorland",
+    "barakb"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2063",
+   "title": "fix: address PR #2062 review feedback",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "dudizimber",
+    "shahar-biron"
+   ]
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#714",
+   "title": "fix: stop demo query streams from dying mid-flight (research#86)",
+   "reviewers": [
+    "Naseem77"
+   ],
+   "lore": [
+    "barakb",
+    "gkorland",
+    "Naseem77"
+   ],
+   "frequent": [
+    "gkorland",
+    "barakb",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#301",
+   "title": "chore(ci): pin GitHub Actions to full commit SHAs",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "Naseem77",
+    "dudizimber"
+   ],
+   "frequent": [
+    "galshubeli",
+    "Naseem77",
+    "mikemikimike"
+   ],
+   "recent": [
+    "dudizimber",
+    "Naseem77",
+    "galshubeli"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2061",
+   "title": "chore: update version to 2.5.0 in package.json and package-lock.json",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2579",
+   "title": "fix(#2578): split the compound key across blocks, and stop packing endpoints",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2060",
+   "title": "feat(tutorial): enhance tutorial step descriptions and improve sub-me\u2026",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "shahar-biron",
+    "barakb",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": []
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#712",
+   "title": "Bump QueryWeaver version to 0.3.2",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "barakb",
+    "gkorland"
+   ],
+   "frequent": [
+    "galshubeli",
+    "gkorland",
+    "barakb"
+   ],
+   "recent": [
+    "gkorland",
+    "barakb",
+    "galshubeli"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2572",
+   "title": "perf(tensor): answer degree without materialising edge ids",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2571",
+   "title": "fix(#2430): skip a delta layer a single-row read cannot touch",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2570",
+   "title": "feat(effects)!: emit, apply, and effects as the only replication mechanism",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "swilly22",
+    "GomezGab"
+   ],
+   "frequent": [
+    "AviAvni",
+    "gkorland",
+    "GomezGab"
+   ],
+   "recent": [
+    "AviAvni",
+    "swilly22",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#549",
+   "title": "fix logo in white mode",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "gkorland",
+    "shahar-biron",
+    "swilly22"
+   ],
+   "recent": []
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2565",
+   "title": "fix: compute the edge-count identity in checked arithmetic",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2562",
+   "title": "fix(planner): anchor a variable-length traverse on an endpoint bound below the scan",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "gkorland",
+    "GomezGab"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "swilly22"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2554",
+   "title": "fix(telemetry): keep the flusher ahead of the load, stop hanging shutdown, and honour MAX_INFO_QUERIES 0",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "swilly22",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "gkorland"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#300",
+   "title": "fix: order vector node searches by distance",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "galshubeli",
+    "Naseem77",
+    "barakb"
+   ],
+   "recent": [
+    "dudizimber",
+    "galshubeli",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#545",
+   "title": "Replace SVG trendshift badge with WEBP format ",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "gkorland",
+    "shahar-biron",
+    "swilly22"
+   ],
+   "recent": []
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2057",
+   "title": "feat(tutorial): set current tab to \"Graph\" when tutorial opens",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": []
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2055",
+   "title": "Schema property rules",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "dudizimber",
+    "shahar-biron"
+   ]
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#710",
+   "title": "Collect QueryWeaver errors in GenAI analytics",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "barakb",
+    "gkorland"
+   ],
+   "frequent": [
+    "galshubeli",
+    "gkorland",
+    "barakb"
+   ],
+   "recent": [
+    "gkorland",
+    "galshubeli",
+    "barakb"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-py#282",
+   "title": "ci: alert on a cancelled scheduled run, not just a failed one",
+   "reviewers": [
+    "gkorland"
+   ],
+   "lore": [
+    "gkorland",
+    "swilly22",
+    "AviAvni"
+   ],
+   "frequent": [
+    "swilly22",
+    "gkorland",
+    "shahar-biron"
+   ],
+   "recent": [
+    "gkorland",
+    "swilly22"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2523",
+   "title": "Upgrade GraphBLAS to 10.5.0, and keep the iso builds iso",
+   "reviewers": [
+    "gkorland"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "gkorland",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2521",
+   "title": "ci(coverage): flush service profiles before upload",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "AviAvni",
+    "dudizimber"
+   ],
+   "frequent": [
+    "AviAvni",
+    "DvirDukhan"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#298",
+   "title": "fix: require falkordb>=1.7 so redis 8.1 installs are not broken",
+   "reviewers": [
+    "Naseem77"
+   ],
+   "lore": [
+    "Naseem77",
+    "gkorland",
+    "drr00t"
+   ],
+   "frequent": [
+    "Naseem77",
+    "barakb"
+   ],
+   "recent": [
+    "Naseem77",
+    "drr00t"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-py#279",
+   "title": "chore(release): 1.7.1 \u2014 restrict redis to the 8.x major line",
+   "reviewers": [
+    "Naseem77"
+   ],
+   "lore": [
+    "gkorland",
+    "swilly22",
+    "Naseem77"
+   ],
+   "frequent": [
+    "swilly22",
+    "gkorland",
+    "shahar-biron"
+   ],
+   "recent": [
+    "Naseem77",
+    "gkorland",
+    "swilly22"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#297",
+   "title": "Migrate to mintlify",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "Naseem77",
+    "drr00t"
+   ],
+   "frequent": [
+    "galshubeli",
+    "Naseem77",
+    "barakb"
+   ],
+   "recent": [
+    "gkorland",
+    "galshubeli",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2051",
+   "title": "feat(tutorial): enhance tutorial steps for edge customization and tab\u2026",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "dudizimber",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#544",
+   "title": "Migrate to Mintlify",
+   "reviewers": [
+    "dragnot",
+    "gkorland"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "Anchel123"
+   ],
+   "frequent": [
+    "gkorland",
+    "shahar-biron",
+    "swilly22"
+   ],
+   "recent": [
+    "gkorland",
+    "dragnot",
+    "Anchel123"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2047",
+   "title": "Add schema view",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-py#276",
+   "title": "fix(asyncio): prevent connection pool kwargs mutation and await schema refresh",
+   "reviewers": [
+    "Naseem77"
+   ],
+   "lore": [
+    "gkorland",
+    "swilly22",
+    "Naseem77"
+   ],
+   "frequent": [
+    "swilly22",
+    "AviAvni",
+    "shahar-biron"
+   ],
+   "recent": [
+    "Naseem77",
+    "gkorland",
+    "binggao1230"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-py#275",
+   "title": "build: bound dependencies to tested versions, release 1.7.0",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "gkorland",
+    "swilly22",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "swilly22",
+    "AviAvni",
+    "shahar-biron"
+   ],
+   "recent": [
+    "gkorland",
+    "swilly22"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2494",
+   "title": "perf(runtime): answer a label predicate from the label matrix (1.77x)",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2493",
+   "title": "fix: C-parity for GRAPH.INFO \u2014 the telemetry write path (1.46x \u2192 1.06x of C), CMD_INFO, bare calls, and the run-time config surface",
+   "reviewers": [
+    "DvirDukhan",
+    "gkorland"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "swilly22",
+    "GomezGab"
+   ],
+   "frequent": [
+    "DvirDukhan"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "swilly22",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2492",
+   "title": "fix(bench): read jemalloc stats by column, not by whitespace",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [],
+   "frequent": [
+    "DvirDukhan"
+   ],
+   "recent": []
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2491",
+   "title": "fix(planner): order a reversed traversal chain from its new anchor (78x), and run the most selective hop first",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "DvirDukhan"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "swilly22"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2489",
+   "title": "test(all-shortest-paths): cover aggregating WITH * over unresolved endpoints",
+   "reviewers": [
+    "AviAvni",
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "AviAvni",
+    "DvirDukhan"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2488",
+   "title": "test(reduce): cover nested reduce with shadowed iterator names",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "AviAvni",
+    "DvirDukhan"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2487",
+   "title": "test(functions): cover crash-inducing arguments to range() and exists()",
+   "reviewers": [
+    "AviAvni",
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "AviAvni",
+    "DvirDukhan"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2471",
+   "title": "test(var-len): cover fixed-length path multiplicity",
+   "reviewers": [
+    "AviAvni",
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "AviAvni",
+    "DvirDukhan"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2469",
+   "title": "test(optional-match): cover cartesian product cardinality in OPTIONAL MATCH",
+   "reviewers": [
+    "AviAvni",
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "AviAvni",
+    "DvirDukhan"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2468",
+   "title": "test: writes inside a subquery apply to every input row",
+   "reviewers": [
+    "AviAvni",
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "AviAvni",
+    "DvirDukhan"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2464",
+   "title": "ci(dependabot): cover Python, uv and Docker dependencies on main",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "DvirDukhan"
+   ],
+   "frequent": [
+    "DvirDukhan",
+    "AviAvni"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2462",
+   "title": "test(validation): cover a repeated relationship variable (#1982)",
+   "reviewers": [
+    "AviAvni",
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "AviAvni",
+    "DvirDukhan"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "GomezGab"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2461",
+   "title": "test(merge): cover MERGE referencing an entity deleted in the same query (#651)",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "AviAvni",
+    "DvirDukhan"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2460",
+   "title": "test(index): cover a negative radius on a point index (#291)",
+   "reviewers": [
+    "AviAvni",
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "AviAvni",
+    "DvirDukhan"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2459",
+   "title": "fix: one attribute dictionary per graph, and an RDB the C engine can load",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "AviAvni",
+    "swilly22",
+    "GomezGab"
+   ],
+   "frequent": [
+    "AviAvni"
+   ],
+   "recent": [
+    "AviAvni"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2456",
+   "title": "test(delete): cover deleting the same edge variable twice (#1018)",
+   "reviewers": [
+    "AviAvni",
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "AviAvni"
+   ],
+   "recent": [
+    "DvirDukhan",
+    "GomezGab"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2455",
+   "title": "test(with): cover re-MATCHing multiple variables carried through WITH (#1949)",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "AviAvni"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2454",
+   "title": "test(path-filter): cover a pattern predicate XORed with a constant operand (#2252)",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "GomezGab",
+    "swilly22"
+   ],
+   "frequent": [
+    "AviAvni"
+   ],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2451",
+   "title": "perf(parser): read parameters straight into values, not an expression tree (6.5x)",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "swilly22",
+    "GomezGab"
+   ],
+   "frequent": [],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2450",
+   "title": "fix: re-check pause and role before a write commits, not just at admission",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "swilly22",
+    "GomezGab",
+    "AviAvni"
+   ],
+   "frequent": [
+    "AviAvni"
+   ],
+   "recent": [
+    "AviAvni",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2447",
+   "title": "fix: don't mistake a multi-arg constructor call for the rewritten struct form",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "DvirDukhan",
+    "swilly22"
+   ],
+   "frequent": [],
+   "recent": [
+    "DvirDukhan"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2044",
+   "title": "bump version to 2.4.0 in package.json and package-lock.json",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2042",
+   "title": "fix: address AI review findings on relationship styling",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "shahar-biron",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2445",
+   "title": "fix(dispatch): widen the cannot-block predicate to C's five flags",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "swilly22",
+    "GomezGab",
+    "AviAvni"
+   ],
+   "frequent": [
+    "AviAvni"
+   ],
+   "recent": [
+    "AviAvni"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2444",
+   "title": "fix(bulk): bound GRAPH.BULK declared counts and make id reservation fallible",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "swilly22",
+    "AviAvni",
+    "GomezGab"
+   ],
+   "frequent": [],
+   "recent": [
+    "AviAvni"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#293",
+   "title": "chore(release): prepare v1.4.0",
+   "reviewers": [
+    "Naseem77"
+   ],
+   "lore": [
+    "Naseem77",
+    "drr00t",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "Naseem77",
+    "barakb"
+   ],
+   "recent": [
+    "Naseem77",
+    "drr00t"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-py#267",
+   "title": "test: assert the client parses execution plans, and fix a plan parser bug",
+   "reviewers": [
+    "swilly22"
+   ],
+   "lore": [
+    "gkorland",
+    "swilly22",
+    "binggao1230"
+   ],
+   "frequent": [
+    "gkorland",
+    "shahar-biron",
+    "AviAvni"
+   ],
+   "recent": [
+    "gkorland",
+    "binggao1230",
+    "dragnot"
+   ]
+  },
+  {
+   "pr": "FalkorDB/FalkorDB#2390",
+   "title": "fix(planner): plan an inline property map once, instead of twice",
+   "reviewers": [
+    "AviAvni"
+   ],
+   "lore": [
+    "swilly22",
+    "AviAvni",
+    "GomezGab"
+   ],
+   "frequent": [],
+   "recent": [
+    "AviAvni",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2031",
+   "title": "Multi tab",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "Naseem77",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2029",
+   "title": "refactor: simplify PaginationList item selection logic and remove del\u2026",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2026",
+   "title": "chore: bump @falkordb/text-to-cypher to 0.2.4",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Anchel123",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Anchel123"
+   ],
+   "recent": [
+    "Anchel123",
+    "barakb",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#678",
+   "title": "chore(deps): combine open Dependabot updates",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "gkorland",
+    "Naseem77"
+   ],
+   "frequent": [
+    "galshubeli",
+    "gkorland",
+    "Naseem77"
+   ],
+   "recent": [
+    "galshubeli",
+    "gkorland",
+    "Anchel123"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2022",
+   "title": "feat: add enterprise graph offloading support and related indicators",
+   "reviewers": [
+    "barakb",
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "Naseem77",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2021",
+   "title": "feat: enhance relationship styling and customization",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "Naseem77",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#2020",
+   "title": "chore: update version to 2.3.2 in package.json and package-lock.json",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/GraphRAG-SDK#288",
+   "title": "feat: chunk-level extraction cache for update() (cache_unchanged_chunks)",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "shahar-biron",
+    "drr00t"
+   ],
+   "frequent": [
+    "galshubeli",
+    "barakb"
+   ],
+   "recent": [
+    "galshubeli",
+    "drr00t",
+    "shahar-biron"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#535",
+   "title": "Remove outdated n8n tool workflow image and section from documentation",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "Naseem77",
+    "gkorland",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "gkorland",
+    "shahar-biron",
+    "dudizimber"
+   ],
+   "recent": []
+  },
+  {
+   "pr": "FalkorDB/docs#534",
+   "title": "Add n8n docs",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "Naseem77",
+    "gkorland",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "gkorland",
+    "dudizimber",
+    "shahar-biron"
+   ],
+   "recent": []
+  },
+  {
+   "pr": "FalkorDB/docs#533",
+   "title": "Add n8n docs",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "gkorland",
+    "dudizimber",
+    "shahar-biron"
+   ],
+   "recent": [
+    "Naseem77",
+    "shahar-biron",
+    "MuhammadQadora"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#532",
+   "title": "docs: add detailed API documentation and role-based access control se\u2026",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "gkorland",
+    "dudizimber",
+    "shahar-biron"
+   ],
+   "recent": [
+    "Naseem77",
+    "shahar-biron",
+    "MuhammadQadora"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#529",
+   "title": "Enhance browser documentation with updated images and new UI elements\u2026",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "frequent": [
+    "gkorland",
+    "dudizimber",
+    "shahar-biron"
+   ],
+   "recent": [
+    "Naseem77",
+    "shahar-biron",
+    "MuhammadQadora"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1994",
+   "title": "chore(deps): batch Dependabot package updates",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "Balance8"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1993",
+   "title": "fix: optimize graph deletion logic by using memoized selectedGraphs",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "Naseem77",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#661",
+   "title": "chore(deps): combine open Dependabot updates",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "gkorland",
+    "Naseem77"
+   ],
+   "frequent": [
+    "galshubeli",
+    "gkorland",
+    "Naseem77"
+   ],
+   "recent": [
+    "galshubeli",
+    "gkorland",
+    "Anchel123"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1985",
+   "title": "Remove sql from batch cypher upload",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "dudizimber",
+    "shahar-biron"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1983",
+   "title": "Fix/helm workflow duplicate with",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "Balance8"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1980",
+   "title": "fix(ci): remove duplicate with blocks in helm workflow checkout steps",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "Naseem77",
+    "gkorland",
+    "barakb"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#526",
+   "title": "docs: add graph algorithms section to Snowflake integration guide",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "barakb"
+   ],
+   "frequent": [
+    "gkorland",
+    "dudizimber",
+    "shahar-biron"
+   ],
+   "recent": [
+    "shahar-biron",
+    "MuhammadQadora",
+    "galshubeli"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1974",
+   "title": "fix: improve graph handling and memory usage checks in various compon\u2026",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "shahar-biron",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1973",
+   "title": "fix: update version to 2.3.0 in package.json and package-lock.json",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "gkorland"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "Balance8"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1962",
+   "title": "feat: implement direct CSV upload support for cloud storage",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "Naseem77",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#647",
+   "title": "ci(pypi): drop TestPyPI dry-run gate, publish straight from build",
+   "reviewers": [
+    "gkorland"
+   ],
+   "lore": [
+    "barakb",
+    "gkorland",
+    "Naseem77"
+   ],
+   "frequent": [
+    "gkorland",
+    "barakb",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1951",
+   "title": "fix(providers): pin graph ops by connection + generation to stop stale applies",
+   "reviewers": [
+    "Anchel123"
+   ],
+   "lore": [
+    "Anchel123",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "shahar-biron",
+    "Naseem77",
+    "Anchel123"
+   ],
+   "recent": [
+    "Anchel123",
+    "dudizimber",
+    "shahar-biron"
+   ]
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#644",
+   "title": "fix(security): detect destructive ops in CTEs/stacked SQL (confirmation bypass)",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "gkorland",
+    "Naseem77"
+   ],
+   "frequent": [
+    "galshubeli",
+    "gkorland",
+    "Naseem77"
+   ],
+   "recent": [
+    "galshubeli",
+    "gkorland",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#643",
+   "title": "fix(agents): affirm INSERT/UPDATE/DELETE support in analysis prompt",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "galshubeli",
+    "Naseem77",
+    "gkorland"
+   ],
+   "frequent": [
+    "galshubeli",
+    "gkorland",
+    "Naseem77"
+   ],
+   "recent": [
+    "gkorland",
+    "galshubeli",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1950",
+   "title": "fix(ui): update context structure for user experience settings and im\u2026",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "dudizimber",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1947",
+   "title": "fix(graph): update layout and display node/edge counts in GraphView",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1946",
+   "title": "Refactor graph names handling to support undefined state and improve \u2026",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Naseem77",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "dudizimber",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#640",
+   "title": "chore(deps): consolidate Dependabot updates (Python, npm, GitHub Actions)",
+   "reviewers": [
+    "MuhammadQadora"
+   ],
+   "lore": [
+    "galshubeli",
+    "gkorland",
+    "Naseem77"
+   ],
+   "frequent": [
+    "galshubeli",
+    "gkorland",
+    "Naseem77"
+   ],
+   "recent": [
+    "galshubeli",
+    "gkorland",
+    "Anchel123"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1938",
+   "title": "fix(auth): make Token DB the sole authority for the connection target",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "Naseem77",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "shahar-biron"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1936",
+   "title": "fix: bump dompurify and pin transitive js-yaml/postcss/@babel/core to close open Dependabot alerts",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#525",
+   "title": "Add Snowflake webinar demo: Air Routes end to end",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "barakb"
+   ],
+   "frequent": [
+    "gkorland",
+    "dudizimber",
+    "shahar-biron"
+   ],
+   "recent": [
+    "shahar-biron",
+    "MuhammadQadora",
+    "galshubeli"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#524",
+   "title": "Update Cognee installation and configuration details",
+   "reviewers": [
+    "dragnot"
+   ],
+   "lore": [],
+   "frequent": [
+    "dudizimber",
+    "shahar-biron",
+    "swilly22"
+   ],
+   "recent": []
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1923",
+   "title": "Chat: confidence badge on 0-100 scale with text-to-cypher 0.2.3",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Anchel123",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Anchel123"
+   ],
+   "recent": [
+    "Anchel123",
+    "barakb",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1921",
+   "title": "feat(graph): implement GraphInfoProvider for isolated state management",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Naseem77",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1913",
+   "title": "[codex] docs: align Helm chart install instructions",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "dudizimber",
+    "barakb",
+    "CarolatDeepLife"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "dudizimber"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1912",
+   "title": "README - Fixes a typo in the main description",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Anchel123",
+    "barakb",
+    "Naseem77"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "Naseem77",
+    "Anchel123"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#516",
+   "title": "docs(graphrag-sdk): expand docs with benchmarks, crash-safety, and examples table",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "shahar-biron",
+    "galshubeli",
+    "barakb"
+   ],
+   "frequent": [
+    "dudizimber",
+    "shahar-biron",
+    "swilly22"
+   ],
+   "recent": [
+    "shahar-biron",
+    "MuhammadQadora",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1910",
+   "title": "Fix tab navigation",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "dudizimber",
+    "shahar-biron",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1901",
+   "title": "fix: use explicit isNodeCell/isLinkCell predicates with correct polar\u2026",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "Naseem77",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": []
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1899",
+   "title": "fix: add type guard to setProperty array branch; use explicit restore\u2026",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "Naseem77",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": []
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1897",
+   "title": "fix: address PR #1892 review comments",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "Naseem77",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "dudizimber",
+    "shahar-biron",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1894",
+   "title": "Enhance CypherEditor and EditorComponent with improved suggestion han\u2026",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1891",
+   "title": "fix: update sentinel role handling and improve query execution logic",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Naseem77",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "dudizimber",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1886",
+   "title": "fix: address staging PR review comments",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Naseem77",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "dudizimber",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1885",
+   "title": "fix: Update ITEM_HEIGHT and improve suggestion handling in Toolbar co\u2026",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Naseem77",
+    "shahar-biron",
+    "barakb"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1884",
+   "title": "chore(deps): bump all dependabot dependencies",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "barakb",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "Naseem77",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1878",
+   "title": "Add focus mode",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Naseem77",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "dudizimber",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1875",
+   "title": "Allow custom local LLM endpoint ports and paths",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Anchel123",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Anchel123"
+   ],
+   "recent": [
+    "Anchel123",
+    "barakb",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#513",
+   "title": "docs(cloud): add guide for Grafana monitoring dashboard panels",
+   "reviewers": [
+    "dudizimber"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "dragnot"
+   ],
+   "frequent": [
+    "gkorland",
+    "shahar-biron",
+    "dudizimber"
+   ],
+   "recent": [
+    "Naseem77",
+    "galshubeli",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1874",
+   "title": "feat: Enhance error handling and logging in BrowserSettings for model\u2026",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Naseem77",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#511",
+   "title": "docs(cloud): add Cloud Operations section with Export and Import guide",
+   "reviewers": [
+    "dudizimber"
+   ],
+   "lore": [],
+   "frequent": [
+    "gkorland",
+    "shahar-biron",
+    "dudizimber"
+   ],
+   "recent": []
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#615",
+   "title": "ci(pypi): build-once publish workflow + PyPI README badge",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "gkorland",
+    "barakb",
+    "Naseem77"
+   ],
+   "frequent": [
+    "gkorland",
+    "Naseem77",
+    "barakb"
+   ],
+   "recent": [
+    "gkorland",
+    "danshalev7",
+    "shahar-biron"
+   ]
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#614",
+   "title": "feat(usage): always-on per-query usage tracking",
+   "reviewers": [
+    "DvirDukhan"
+   ],
+   "lore": [
+    "gkorland",
+    "barakb",
+    "Naseem77"
+   ],
+   "frequent": [
+    "gkorland",
+    "Naseem77",
+    "barakb"
+   ],
+   "recent": [
+    "barakb",
+    "gkorland",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#510",
+   "title": "docs(cloud): add Stopped Instances terms to Enterprise tier",
+   "reviewers": [
+    "dudizimber"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "dudizimber"
+   ],
+   "frequent": [
+    "gkorland",
+    "shahar-biron",
+    "swilly22"
+   ],
+   "recent": [
+    "gkorland",
+    "danshalev7"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#509",
+   "title": "docs(cloud): add Stopped Instances terms to Pro tier",
+   "reviewers": [
+    "dudizimber"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "dudizimber"
+   ],
+   "frequent": [
+    "gkorland",
+    "shahar-biron",
+    "swilly22"
+   ],
+   "recent": [
+    "shahar-biron",
+    "gkorland",
+    "danshalev7"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#508",
+   "title": "docs(cloud): add Stopped Instances terms to Startup tier",
+   "reviewers": [
+    "dudizimber"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "dudizimber"
+   ],
+   "frequent": [
+    "gkorland",
+    "shahar-biron",
+    "swilly22"
+   ],
+   "recent": [
+    "gkorland",
+    "shahar-biron",
+    "danshalev7"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#507",
+   "title": "docs(cloud): clarify Free Tier has no persistence or backups on deletion",
+   "reviewers": [
+    "dudizimber"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "dudizimber"
+   ],
+   "frequent": [
+    "gkorland",
+    "shahar-biron",
+    "swilly22"
+   ],
+   "recent": [
+    "gkorland",
+    "danshalev7"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1865",
+   "title": "feat: use instance UDFs in chat (text-to-cypher 0.2.0)",
+   "reviewers": [
+    "Naseem77"
+   ],
+   "lore": [
+    "Anchel123",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "shahar-biron",
+    "Anchel123",
+    "Naseem77"
+   ],
+   "recent": [
+    "Anchel123",
+    "dudizimber",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#503",
+   "title": "Document Browser local LLM setup",
+   "reviewers": [
+    "Anchel123"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "danshalev7"
+   ],
+   "frequent": [
+    "gkorland",
+    "shahar-biron",
+    "swilly22"
+   ],
+   "recent": [
+    "galshubeli",
+    "gkorland",
+    "swilly22"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1860",
+   "title": "fix: bump version to 2.1.1 in package.json and package-lock.json",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Naseem77",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "Naseem77",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1857",
+   "title": "fix: update base image to use node:24-alpine for consistency",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Naseem77",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "dudizimber",
+    "gkorland",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#501",
+   "title": "Update Snowflake integration docs",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "galshubeli"
+   ],
+   "frequent": [
+    "gkorland",
+    "shahar-biron",
+    "swilly22"
+   ],
+   "recent": [
+    "galshubeli",
+    "gkorland",
+    "swilly22"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1855",
+   "title": "chore(auth): replace JWT authentication check with getClient function",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Naseem77",
+    "shahar-biron",
+    "barakb"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1853",
+   "title": "chore(deps): bump all pending dependency bot PRs",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "Naseem77",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "Naseem77",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1847",
+   "title": "chore: bump version to 2.1.0 in package.json and package-lock.json",
+   "reviewers": [
+    "Naseem77"
+   ],
+   "lore": [
+    "Naseem77",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "Naseem77",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1846",
+   "title": "fix(e2e): use data-testid for settings section headers to fix flaky test",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Naseem77",
+    "shahar-biron",
+    "barakb"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1844",
+   "title": "chore(deps): bump all Dependabot updates (June 2026)",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Naseem77",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "Naseem77",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-py#236",
+   "title": "Fix async unix-socket connection crashing in Is_Cluster (#235)",
+   "reviewers": [
+    "gkorland"
+   ],
+   "lore": [
+    "gkorland",
+    "swilly22",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "swilly22",
+    "shahar-biron",
+    "AviAvni"
+   ],
+   "recent": [
+    "gkorland",
+    "swilly22"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1838",
+   "title": "Add configurable CSP connect sources",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Anchel123",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Anchel123"
+   ],
+   "recent": [
+    "Anchel123",
+    "MuhammadQadora"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#498",
+   "title": "docs(cloud): add Maintenance Windows page for Enterprise",
+   "reviewers": [
+    "dudizimber"
+   ],
+   "lore": [
+    "shahar-biron",
+    "gkorland",
+    "danshalev7"
+   ],
+   "frequent": [
+    "gkorland",
+    "shahar-biron",
+    "swilly22"
+   ],
+   "recent": []
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1833",
+   "title": "fix: improve timeout handling by fetching server config for TIMEOUT_MAX",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Naseem77",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "dudizimber",
+    "shahar-biron",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#496",
+   "title": "docs(cloud): remove Instance Type column from Pro Tier tables",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "danshalev7"
+   ],
+   "frequent": [
+    "gkorland",
+    "shahar-biron",
+    "swilly22"
+   ],
+   "recent": [
+    "shahar-biron",
+    "gkorland",
+    "danshalev7"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#495",
+   "title": "docs: Document SQL CDC features introduced in DM-SQL-to-FalkorDB",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "gkorland",
+    "galshubeli",
+    "swilly22"
+   ],
+   "frequent": [
+    "gkorland",
+    "swilly22",
+    "danshalev7"
+   ],
+   "recent": [
+    "galshubeli",
+    "gkorland",
+    "swilly22"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1821",
+   "title": "feat(tutorial): implement sub-menu keep-alive mechanism during step t\u2026",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Naseem77",
+    "shahar-biron",
+    "barakb"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": []
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1818",
+   "title": "Fix #1428 feat: enhance chat functionality and improve error handling",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Naseem77",
+    "shahar-biron",
+    "barakb"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "dudizimber",
+    "Naseem77",
+    "shahar-biron"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#493",
+   "title": "docs: add GraphRAG Server page for non-expert users",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "gkorland",
+    "shahar-biron",
+    "swilly22"
+   ],
+   "frequent": [
+    "gkorland",
+    "shahar-biron",
+    "swilly22"
+   ],
+   "recent": [
+    "gkorland",
+    "swilly22",
+    "GomezGab"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1817",
+   "title": "Fix #1186 feat(settings): enhance settings configuration and validation tests f\u2026",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Naseem77",
+    "shahar-biron",
+    "barakb"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "Balance8"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1816",
+   "title": "Fix #1635 fix: prevent premature removal of savedContent on unauthenticated status",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Naseem77",
+    "shahar-biron",
+    "barakb"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "dudizimber",
+    "shahar-biron",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1808",
+   "title": "chore: update version to 2.0.10 in package.json and package-lock.json",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Naseem77",
+    "barakb",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "barakb",
+    "Naseem77",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#590",
+   "title": "chore(deps): combine compatible Dependabot bumps",
+   "reviewers": [
+    "galshubeli"
+   ],
+   "lore": [
+    "gkorland",
+    "galshubeli",
+    "Naseem77"
+   ],
+   "frequent": [
+    "galshubeli",
+    "gkorland",
+    "Naseem77"
+   ],
+   "recent": [
+    "galshubeli",
+    "gkorland",
+    "Anchel123"
+   ]
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#584",
+   "title": "feat(packaging): version single-source, /version endpoint + UI, SDK-only PyPI publish",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "gkorland",
+    "Naseem77",
+    "barakb"
+   ],
+   "frequent": [
+    "gkorland",
+    "Naseem77",
+    "barakb"
+   ],
+   "recent": [
+    "gkorland",
+    "Anchel123",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/QueryWeaver#581",
+   "title": "fix(auth): prevent signup token issuance for existing accounts (CVE-2026-10130)",
+   "reviewers": [
+    "Naseem77"
+   ],
+   "lore": [
+    "gkorland",
+    "galshubeli",
+    "Naseem77"
+   ],
+   "frequent": [
+    "galshubeli",
+    "gkorland",
+    "Naseem77"
+   ],
+   "recent": [
+    "galshubeli",
+    "gkorland",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1801",
+   "title": "Fix #1552 Add layouts",
+   "reviewers": [
+    "barakb",
+    "shahar-biron"
+   ],
+   "lore": [
+    "Naseem77",
+    "shahar-biron",
+    "barakb"
+   ],
+   "frequent": [
+    "barakb",
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "dudizimber",
+    "barakb",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#487",
+   "title": "Fix pro-tier tables rendering",
+   "reviewers": [
+    "dragnot"
+   ],
+   "lore": [
+    "gkorland",
+    "dragnot",
+    "danshalev7"
+   ],
+   "frequent": [
+    "gkorland",
+    "swilly22",
+    "danshalev7"
+   ],
+   "recent": [
+    "dragnot",
+    "gkorland",
+    "danshalev7"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1791",
+   "title": "Add support for serving the browser under a sub-path",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Anchel123",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "shahar-biron",
+    "Anchel123",
+    "barakb"
+   ],
+   "recent": [
+    "Anchel123",
+    "shahar-biron",
+    "Naseem77"
+   ]
+  },
+  {
+   "pr": "FalkorDB/docs#486",
+   "title": "Optimize pro-tier tables column widths for narrow screens",
+   "reviewers": [
+    "dragnot"
+   ],
+   "lore": [
+    "gkorland",
+    "dragnot",
+    "danshalev7"
+   ],
+   "frequent": [
+    "gkorland",
+    "swilly22",
+    "danshalev7"
+   ],
+   "recent": [
+    "dragnot",
+    "gkorland",
+    "danshalev7"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1788",
+   "title": "Stabilize chat e2e tests",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Anchel123",
+    "shahar-biron",
+    "gkorland"
+   ],
+   "frequent": [
+    "shahar-biron",
+    "Anchel123",
+    "barakb"
+   ],
+   "recent": [
+    "Anchel123",
+    "shahar-biron"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1783",
+   "title": "Update text-to-cypher to 0.1.14",
+   "reviewers": [
+    "Naseem77"
+   ],
+   "lore": [
+    "Anchel123",
+    "Naseem77",
+    "shahar-biron"
+   ],
+   "frequent": [
+    "shahar-biron",
+    "Anchel123",
+    "Naseem77"
+   ],
+   "recent": [
+    "Anchel123",
+    "Naseem77",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1782",
+   "title": "chore: bump version to 2.0.8",
+   "reviewers": [
+    "barakb"
+   ],
+   "lore": [
+    "Anchel123",
+    "shahar-biron",
+    "gkorland"
+   ],
+   "frequent": [
+    "shahar-biron",
+    "Anchel123"
+   ],
+   "recent": [
+    "Anchel123",
+    "barakb",
+    "gkorland"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1780",
+   "title": "fix: restore bundled Monaco loader",
+   "reviewers": [
+    "Anchel123"
+   ],
+   "lore": [
+    "Anchel123",
+    "shahar-biron",
+    "gkorland"
+   ],
+   "frequent": [
+    "shahar-biron",
+    "Anchel123"
+   ],
+   "recent": [
+    "Anchel123"
+   ]
+  }
+ ]
+}

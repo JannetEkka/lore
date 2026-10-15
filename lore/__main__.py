@@ -38,6 +38,11 @@ def main(argv=None):
     f.add_argument("--out", help="snapshot path; .json.gz is gzipped (default data/<target>.json)")
     lo = sub.add_parser("load")
     lo.add_argument("snapshot")
+    bt = sub.add_parser("backtest")
+    bt.add_argument("graph")
+    bt.add_argument("--days", type=int, default=365)
+    bt.add_argument("--limit", type=int, default=300)
+    bt.add_argument("--llm", type=int, default=0, help="also ask Gemini alone for this many PRs")
     for name in ("who-knows", "related", "reviewers", "risk"):
         q = sub.add_parser(name)
         q.add_argument("graph")
@@ -67,6 +72,19 @@ def main(argv=None):
         return
 
     g = db.connect().select_graph(db.graph_name(a.graph))
+    if a.cmd == "backtest":
+        from . import backtest
+        out = backtest.run(g, days=a.days, limit=a.limit, llm_sample=a.llm)
+        path = os.path.join(DATA, "backtest", db.graph_name(a.graph) + ".json")
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "w") as fh:
+            json.dump(out, fh, indent=1)
+        print(f"{out['prs']} PRs. Share where the top pick / top 3 include a real reviewer:")
+        for m, r in out["summary"].items():
+            if r["n"]:
+                print(f"  {m:9} top1 {r['top1']:.0%}  top3 {r['top3']:.0%}  (n={r['n']})")
+        print(f"Saved {path}")
+        return
     trace = queries.Trace()
     if a.cmd == "who-knows":
         out = queries.who_knows(g, a.arg, trace=trace)
