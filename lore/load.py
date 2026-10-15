@@ -2,7 +2,7 @@
 import time
 from collections import defaultdict
 
-from .areas import area_for
+from .areas import VENDORED, assign, plan_areas
 from .config import ACTIVE_DAYS, DECAY_K, W_AUTHOR, W_COMMENT, W_REVIEW
 
 INDEXES = [
@@ -48,6 +48,7 @@ def rows_from_snapshot(snap):
     for repo in snap["repos"]:
         name = repo["name"]
         r["repos"].append({"name": name, "url": repo["url"]})
+        plan = plan_areas([f for p in repo["prs"] for f in p.get("files", [])])
         pr_numbers = {p["number"] for p in repo["prs"]}
         issue_numbers = {i["number"] for i in repo["issues"]}
 
@@ -61,7 +62,9 @@ def rows_from_snapshot(snap):
                              "author": p["author"], "state": p["state"], "url": p["url"],
                              "created_at": p["created_at"], "merged_at": p["merged_at"]})
             for path in p.get("files", []):
-                area = area_for(path)
+                if path.startswith(VENDORED):
+                    continue
+                area = assign(path, plan)
                 r["touches"].append({"pr": pid, "repo": name, "file": path, "file_id": f"{name}:{path}",
                                      "area": area, "area_id": f"{name}:{area}"})
             for n in p["fixes"]:

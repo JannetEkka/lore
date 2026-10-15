@@ -32,3 +32,14 @@ def test_git_log_maps_files_to_prs():
         7: ["docs/a.md"],
         8: [],
     }
+
+
+def test_big_areas_split_into_their_subdirectories():
+    from lore.areas import assign, plan_areas
+    files = [f"graph/src/planner/f{i}.rs" for i in range(40)] + [f"graph/src/index/f{i}.rs" for i in range(40)] + \
+            ["graph/src/lib.rs"] + [f"docs/p{i}.md" for i in range(5)] + [f"build/graphblas/x{i}.c" for i in range(99)]
+    plan = plan_areas(files, minimum=30)
+    assert assign("graph/src/planner/f1.rs", plan) == "graph/src/planner"
+    assert assign("graph/src/lib.rs", plan) == "graph/src"   # files directly in a split area stay there
+    assert assign("docs/p1.md", plan) == "docs"              # small areas stay as they are
+    assert not any(a.startswith("build") for a in plan)      # copied-in libraries never become areas

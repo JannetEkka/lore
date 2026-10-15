@@ -16,7 +16,7 @@ Lore turns a public GitHub project's history into a graph in FalkorDB, then answ
 
 The git trick: when a project squash-merges, each commit subject ends in the PR number, like `fix: plan a self-loop hop (#3102)`. A merge commit says `Merge pull request #7 from ...`. So `git log --first-parent -m --name-only` maps every merged PR to its files without spending GitHub's allowance.
 
-**What's kept:** GitHub logins, issue and PR numbers, titles, dates, labels, file paths, and the first 2,000 characters of an issue's text. **Never kept:** emails or real names. Bots (`[bot]` accounts, dependabot and similar) are skipped. Copied-in code (`deps/`, `vendor/`, `third_party/`, `node_modules/`) and lock files are ignored, because who edits them says little about who knows the project.
+**What's kept:** GitHub logins, issue and PR numbers, titles, dates, labels, file paths, and the first 2,000 characters of an issue's text. **Never kept:** emails or real names. Bots (`[bot]` accounts, dependabot and similar) are skipped. Copied-in code (`deps/`, `vendor/`, `third_party/`, `node_modules/`, `build/`) and lock files are ignored, because who edits them says little about who knows the project.
 
 ## The graph
 
@@ -40,13 +40,13 @@ graph LR
 | `Person` | a GitHub login | `login`, `last_active`, `active` (any activity in the last 90 days) |
 | `PR`, `Issue` | both also carry the label `Item`, because a reference can point at either | `id` (`owner/repo#123`), `title`, `state`, dates, `url` |
 | `File` | a path in a repo | `id` (`owner/repo:path`), `path` |
-| `Area` | a directory two levels deep: `src/index/vector.c` → `src/index` | `id`, `path`, `repo` |
+| `Area` | a directory: two levels deep, split further where a repo is big (see below) | `id`, `path`, `repo` |
 | `Repo` | one repository; in an org, it plays the part of a team | `name`, `url` |
 | `Label` | a GitHub label, per repo | `name` |
 
 Edges worth knowing: `REVIEWED` has `state` (strongest of APPROVED > CHANGES_REQUESTED > COMMENTED), `at` and `count`. `COMMENTED_ON` has `count` and `last_at`. `FIXES` comes from "Fixes #12" in a PR; `REFERS_TO` from any other "#12". `KNOWS` is computed, not fetched (next section).
 
-**Why an area is a directory.** People know modules, not single files, and a whole repo is too coarse to route an issue. Two levels deep fits most layouts (`src/index`, `tests/flow`). A Java-style `src/main/java/...` layout would need a deeper setting (`AREA_DEPTH` in `lore/config.py`).
+**Why an area is a directory.** People know modules, not single files, and a whole repo is too coarse to route an issue. Lore starts two directories deep (`src/index`, `tests/flow`), then splits any area holding more than 6% of a repo's files (and at least 30) into its subdirectories, down to four levels. So FalkorDB's `graph/src` becomes `graph/src/runtime` and its siblings, and GraphRAG-SDK's code lands in `graphrag_sdk/src/graphrag_sdk/ingestion` and similar, while small areas like `docs` stay whole. Files directly inside a split directory stay in it.
 
 **One graph per project.** FalkorDB holds many isolated graphs in one instance, so each org or repo gets its own (`FalkorDB`, `owner__repo`).
 
