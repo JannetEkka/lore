@@ -1,11 +1,11 @@
 {
  "days": 365,
  "prs": 300,
- "llm_model": "gemini-3.8-flash",
+ "llm_model": null,
  "summary": {
   "lore": {
    "n": 300,
-   "top1": 0.573,
+   "top1": 0.577,
    "top3": 0.903
   },
   "frequent": {
@@ -15,13 +15,8 @@
   },
   "recent": {
    "n": 300,
-   "top1": 0.433,
-   "top3": 0.643
-  },
-  "llm": {
-   "n": 0,
-   "top1": null,
-   "top3": null
+   "top1": 0.423,
+   "top3": 0.633
   }
  },
  "examples": [
@@ -468,9 +463,7 @@
     "GomezGab",
     "swilly22"
    ],
-   "recent": [
-    "AviAvni"
-   ]
+   "recent": []
   },
   {
    "pr": "FalkorDB/FalkorDB#3179",
@@ -488,9 +481,7 @@
     "GomezGab",
     "swilly22"
    ],
-   "recent": [
-    "AviAvni"
-   ]
+   "recent": []
   },
   {
    "pr": "FalkorDB/docs#575",
@@ -817,9 +808,7 @@
     "DvirDukhan"
    ],
    "lore": [
-    "DvirDukhan",
-    "gkorland",
-    "yzxcj797"
+    "DvirDukhan"
    ],
    "frequent": [
     "DvirDukhan",
@@ -838,8 +827,7 @@
    ],
    "lore": [
     "DvirDukhan",
-    "gkorland",
-    "yzxcj797"
+    "swilly22"
    ],
    "frequent": [
     "DvirDukhan",
@@ -1023,8 +1011,7 @@
    ],
    "lore": [
     "DvirDukhan",
-    "gkorland",
-    "yzxcj797"
+    "swilly22"
    ],
    "frequent": [
     "DvirDukhan",
@@ -1065,8 +1052,7 @@
    ],
    "lore": [
     "DvirDukhan",
-    "gkorland",
-    "yzxcj797"
+    "gkorland"
    ],
    "frequent": [
     "DvirDukhan",
@@ -1279,8 +1265,7 @@
    ],
    "lore": [
     "DvirDukhan",
-    "gkorland",
-    "yzxcj797"
+    "gkorland"
    ],
    "frequent": [
     "DvirDukhan",
@@ -1321,8 +1306,7 @@
    ],
    "lore": [
     "DvirDukhan",
-    "gkorland",
-    "yzxcj797"
+    "gkorland"
    ],
    "frequent": [
     "DvirDukhan",
@@ -1384,8 +1368,7 @@
    ],
    "lore": [
     "DvirDukhan",
-    "gkorland",
-    "yzxcj797"
+    "swilly22"
    ],
    "frequent": [
     "DvirDukhan",
@@ -1404,8 +1387,7 @@
    ],
    "lore": [
     "DvirDukhan",
-    "gkorland",
-    "yzxcj797"
+    "swilly22"
    ],
    "frequent": [
     "DvirDukhan",
@@ -1496,24 +1478,6 @@
    "recent": [
     "olifarhaan",
     "gkorland",
-    "DvirDukhan"
-   ]
-  },
-  {
-   "pr": "FalkorDB/FalkorDB#2873",
-   "title": "ci(asan): get llvm-symbolizer from the builder, not apt.llvm.org",
-   "reviewers": [
-    "DvirDukhan"
-   ],
-   "lore": [
-    "DvirDukhan"
-   ],
-   "frequent": [
-    "DvirDukhan",
-    "GomezGab",
-    "gkorland"
-   ],
-   "recent": [
     "DvirDukhan"
    ]
   },
@@ -1733,8 +1697,8 @@
     "AviAvni"
    ],
    "lore": [
-    "AviAvni",
     "DvirDukhan",
+    "AviAvni",
     "gkorland"
    ],
    "frequent": [
@@ -1985,7 +1949,7 @@
    "lore": [
     "Naseem77",
     "gkorland",
-    "mikemikimike"
+    "drr00t"
    ],
    "frequent": [
     "Naseem77",
@@ -2028,7 +1992,7 @@
    ],
    "lore": [
     "galshubeli",
-    "mikemikimike",
+    "drr00t",
     "gkorland"
    ],
    "frequent": [
@@ -2051,7 +2015,7 @@
    "lore": [
     "galshubeli",
     "mikemikimike",
-    "gkorland"
+    "drr00t"
    ],
    "frequent": [
     "galshubeli",
@@ -2073,7 +2037,7 @@
    "lore": [
     "galshubeli",
     "gkorland",
-    "mikemikimike"
+    "drr00t"
    ],
    "frequent": [
     "galshubeli",
@@ -2116,7 +2080,7 @@
    ],
    "lore": [
     "galshubeli",
-    "mikemikimike",
+    "drr00t",
     "gkorland"
    ],
    "frequent": [
@@ -2159,7 +2123,7 @@
    "lore": [
     "galshubeli",
     "gkorland",
-    "mikemikimike"
+    "drr00t"
    ],
    "frequent": [
     "galshubeli",
@@ -2554,8 +2518,8 @@
    ],
    "lore": [
     "galshubeli",
-    "barakb",
-    "Naseem77"
+    "Naseem77",
+    "barakb"
    ],
    "frequent": [
     "galshubeli",
@@ -2739,8 +2703,8 @@
    ],
    "lore": [
     "galshubeli",
-    "mikemikimike",
-    "drr00t"
+    "drr00t",
+    "mikemikimike"
    ],
    "frequent": [
     "galshubeli",
@@ -2884,8 +2848,8 @@
    ],
    "lore": [
     "galshubeli",
-    "barakb",
-    "Naseem77"
+    "Naseem77",
+    "barakb"
    ],
    "frequent": [
     "galshubeli",
@@ -3056,7 +3020,7 @@
    "lore": [
     "galshubeli",
     "barakb",
-    "gkorland"
+    "Naseem77"
    ],
    "frequent": [
     "galshubeli",
@@ -3076,8 +3040,8 @@
     "galshubeli"
    ],
    "lore": [
-    "galshubeli",
     "Naseem77",
+    "galshubeli",
     "barakb"
    ],
    "frequent": [
@@ -3142,8 +3106,8 @@
    ],
    "lore": [
     "galshubeli",
-    "barakb",
-    "Naseem77"
+    "Naseem77",
+    "barakb"
    ],
    "frequent": [
     "galshubeli",
@@ -3487,8 +3451,8 @@
     "shahar-biron"
    ],
    "lore": [
-    "barakb",
     "shahar-biron",
+    "barakb",
     "Naseem77"
    ],
    "frequent": [
@@ -3506,8 +3470,8 @@
    ],
    "lore": [
     "barakb",
-    "Naseem77",
-    "shahar-biron"
+    "shahar-biron",
+    "Naseem77"
    ],
    "frequent": [
     "barakb",
@@ -3717,8 +3681,8 @@
    ],
    "lore": [
     "barakb",
-    "Naseem77",
-    "shahar-biron"
+    "shahar-biron",
+    "Naseem77"
    ],
    "frequent": [
     "barakb",
@@ -4237,8 +4201,8 @@
     "AviAvni"
    ],
    "lore": [
-    "swilly22",
     "AviAvni",
+    "swilly22",
     "GomezGab"
    ],
    "frequent": [],
@@ -4296,8 +4260,8 @@
    ],
    "lore": [
     "swilly22",
-    "AviAvni",
-    "GomezGab"
+    "GomezGab",
+    "AviAvni"
    ],
    "frequent": [],
    "recent": [
@@ -4467,8 +4431,8 @@
    ],
    "lore": [
     "galshubeli",
-    "shahar-biron",
-    "drr00t"
+    "drr00t",
+    "shahar-biron"
    ],
    "frequent": [
     "galshubeli",
@@ -4980,8 +4944,8 @@
    ],
    "lore": [
     "Naseem77",
-    "barakb",
-    "shahar-biron"
+    "shahar-biron",
+    "CarolatDeepLife"
    ],
    "frequent": [
     "barakb",
@@ -5080,8 +5044,8 @@
     "barakb"
    ],
    "lore": [
-    "Naseem77",
     "barakb",
+    "Naseem77",
     "shahar-biron"
    ],
    "frequent": [
@@ -5188,9 +5152,9 @@
     "shahar-biron"
    ],
    "lore": [
-    "Naseem77",
+    "shahar-biron",
     "barakb",
-    "shahar-biron"
+    "Naseem77"
    ],
    "frequent": [
     "barakb",
@@ -5206,9 +5170,9 @@
     "shahar-biron"
    ],
    "lore": [
-    "Naseem77",
     "barakb",
-    "shahar-biron"
+    "shahar-biron",
+    "Naseem77"
    ],
    "frequent": [
     "barakb",
@@ -6282,6 +6246,27 @@
    ],
    "recent": [
     "Anchel123"
+   ]
+  },
+  {
+   "pr": "FalkorDB/falkordb-browser#1778",
+   "title": "feat(login): add connectWithQueryParams method for login flow with UR\u2026",
+   "reviewers": [
+    "shahar-biron"
+   ],
+   "lore": [
+    "Naseem77",
+    "shahar-biron",
+    "gkorland"
+   ],
+   "frequent": [
+    "shahar-biron",
+    "Naseem77"
+   ],
+   "recent": [
+    "Naseem77",
+    "barakb",
+    "gkorland"
    ]
   }
  ]

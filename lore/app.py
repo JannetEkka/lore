@@ -15,7 +15,7 @@ from pydantic import BaseModel
 
 from . import agent, db, queries
 from .__main__ import read_snapshot
-from .load import load_snapshot
+from .load import LOADER_VERSION, load_snapshot
 from .models import list_models
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -40,12 +40,16 @@ def _load_snapshots():
         g = conn.select_graph(name)
         meta = []
         try:
-            meta = g.query("MATCH (m:Meta) RETURN m.fetched_at").result_set
+            meta = g.query("MATCH (m:Meta) RETURN m.fetched_at, m.version").result_set
         except Exception:
             pass
-        if not meta or meta[0][0] != snap["fetched_at"]:
+        if not meta or meta[0] != [snap["fetched_at"], LOADER_VERSION]:
+            if meta and meta[0][1] != LOADER_VERSION:
+                g.delete()
+                g = conn.select_graph(name)
             load_snapshot(g, snap)
-            g.query("MERGE (m:Meta) SET m.fetched_at = $f, m.target = $t", {"f": snap["fetched_at"], "t": snap["target"]})
+            g.query("MERGE (m:Meta) SET m.fetched_at = $f, m.target = $t, m.version = $v",
+                    {"f": snap["fetched_at"], "t": snap["target"], "v": LOADER_VERSION})
         stats = {row[0]: row[1] for row in g.query(STATS).result_set}
         PROJECTS[name] = {"name": name, "target": snap["target"], "fetched_at": snap["fetched_at"],
                           "repos": [r["name"] for r in snap["repos"]], "stats": stats}

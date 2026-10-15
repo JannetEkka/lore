@@ -10,6 +10,9 @@ INDEXES = [
     ("Item", "id"), ("PR", "id"), ("Issue", "id"), ("Label", "id"),
 ]
 
+# Bump when loading changes what ends up in the graph, so saved graphs are rebuilt.
+LOADER_VERSION = 2
+
 REVIEW_RANK = {"APPROVED": 3, "CHANGES_REQUESTED": 2, "COMMENTED": 1, "DISMISSED": 0}
 
 
