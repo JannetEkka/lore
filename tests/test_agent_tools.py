@@ -32,3 +32,18 @@ def test_tools_run_without_a_model(graph):
     agent._evidence(out, evidence)
     assert evidence["people"] == {"alice", "bob"} and "acme/db#10" in evidence["items"]
     assert agent.execute(graph, "get_item", {"ref": "#999"}, trace) == {"error": "no such issue or PR in this project's graph"}
+
+
+def test_models_that_just_failed_are_tried_last(monkeypatch):
+    monkeypatch.setattr(agent, "list_models", lambda key=None: ["a", "b", "c"])
+    agent.COOLDOWN.clear()
+    agent._cool("a", "503: busy")
+    agent._cool("b", "404: retired")
+    assert agent._order(None, "k") == ["c", "a", "b"]
+    agent.COOLDOWN.clear()
+
+
+def test_risk_knowers_become_proof_people():
+    evidence = {"items": {}, "people": set(), "areas": {}}
+    agent._evidence([{"area": "r:src/udf", "path": "src/udf", "knowers": ["swilly22"]}], evidence)
+    assert evidence["people"] == {"swilly22"} and evidence["areas"] == {"r:src/udf": "src/udf"}

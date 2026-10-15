@@ -110,6 +110,8 @@ def _evidence(result, out):
             out["items"].setdefault(result["pr"], {"id": result["pr"], "title": result.get("title"), "url": result["url"]})
         if result.get("login"):
             out["people"].add(result["login"])
+        for login in result.get("knowers") or []:
+            out["people"].add(login)
         if result.get("area") and result.get("path"):
             out["areas"].setdefault(result["area"], result["path"])
         for v in result.values():
@@ -117,6 +119,21 @@ def _evidence(result, out):
     elif isinstance(result, list):
         for v in result:
             _evidence(v, out)
+
+
+COOLDOWN = {}  # model -> time until which it goes to the back of the line
+
+
+def _cool(model, err):
+    """A model that just failed waits before it's tried first again: retired for a day, out of quota 10 minutes, busy 2."""
+    code = (err or "")[:3]
+    COOLDOWN[model] = __import__("time").time() + {"404": 86400, "429": 600, "503": 120, "500": 120}.get(code, 300)
+
+
+def _order(model, key):
+    now = __import__("time").time()
+    names = fallback_order(model, list_models(key))
+    return [m for m in names if COOLDOWN.get(m, 0) <= now] + [m for m in names if COOLDOWN.get(m, 0) > now]
 
 
 def _call(model, key, body):
@@ -140,7 +157,7 @@ def run(g, question, project, model=None, key=None, max_steps=8):
         yield {"type": "error", "message": "No Gemini key: set GEMINI_API_KEY or paste your own key."}
         return
     try:
-        order = fallback_order(model, list_models(key))
+        order = _order(model, key)
     except requests.RequestException as e:
         yield {"type": "error", "message": f"Couldn't list Gemini models: {e}"}
         return
@@ -159,6 +176,7 @@ def run(g, question, project, model=None, key=None, max_steps=8):
             content = (data or {}).get("candidates", [{}])[0].get("content") if data else None
             if content and content.get("parts"):
                 break
+            _cool(order[i], err)
             yield {"type": "fallback", "from": order[i], "reason": err or "empty response"}
             i += 1
             if i >= len(order):
