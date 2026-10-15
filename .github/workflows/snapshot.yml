@@ -1,0 +1,45 @@
+# Keeps Lore's ready-made projects current: fetches each one's public GitHub history every
+# six hours and commits the snapshot. The app and the backtest load these files.
+name: Snapshot
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [".github/workflows/snapshot.yml", "lore/github.py"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Fetch FalkorDB
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          python -m lore fetch FalkorDB
+          --repos FalkorDB/FalkorDB,FalkorDB/falkordb-browser,FalkorDB/GraphRAG-SDK,FalkorDB/QueryWeaver,FalkorDB/falkordb-py,FalkorDB/docs
+          --out data/snapshots/FalkorDB.json.gz
+      - name: Commit the snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/snapshots
+          git diff --cached --quiet && exit 0
+          git commit -m "Snapshot: FalkorDB, $(date -u +%Y-%m-%dT%H:%MZ)"
+          git pull --rebase
+          git push
