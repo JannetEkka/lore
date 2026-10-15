@@ -202,12 +202,16 @@ RETURN a.id AS area, a.path AS path, a.repo AS repo, recent_prs, knowers
 ORDER BY recent_prs DESC"""
 
 
+NOT_KNOWLEDGE = {"images", "img", "assets", "static", "_includes", ".github", "public", "fonts"}
+
+
 def knowledge_risk(g, days=180, min_prs=3, min_score=1.0, now=None, trace=None):
     """Areas with recent work that at most one active person knows well."""
     trace = trace if trace is not None else Trace()
     now = now or int(time.time())
-    return trace.run(g, "knowledge_risk", RISK,
-                     {"since": now - days * 86400, "min_prs": min_prs, "min_score": min_score})
+    rows = trace.run(g, "knowledge_risk", RISK, {"since": now - days * 86400, "min_prs": min_prs, "min_score": min_score})
+    # Assets and CI config aren't knowledge in the sense that matters here.
+    return [r for r in rows if not set(r["path"].split("/")) & NOT_KNOWLEDGE]
 
 
 

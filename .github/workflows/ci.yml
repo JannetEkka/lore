@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: ["data/snapshots/**"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python -m pytest -q
+
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t lore .
+      - name: Smoke test
+        run: |
+          docker run -d -p 8000:8000 --name lore lore
+          for i in $(seq 1 60); do curl -sf localhost:8000/api/projects > projects.json && break; sleep 2; done
+          cat projects.json | head -c 600; echo
+          curl -sf localhost:8000/ > /dev/null
+          curl -sf "localhost:8000/api/issues?project=FalkorDB" | head -c 300; echo
+          docker logs lore | tail -20

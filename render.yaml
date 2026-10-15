@@ -1,0 +1,11 @@
+# Render Blueprint: Dashboard → New → Blueprint → pick this repo → paste GEMINI_API_KEY → Apply.
+services:
+  - type: web
+    name: lore
+    runtime: docker
+    plan: free
+    autoDeploy: true            # every snapshot commit redeploys with fresh data
+    healthCheckPath: /api/projects
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false             # asked for once in the dashboard; never in the repo
