@@ -1,0 +1,171 @@
+1
+00:00:00,721 --> 00:00:02,509
+This is Lore.
+
+2
+00:00:02,508 --> 00:00:07,113
+Every open-source project carries knowledge that nobody wrote down:
+
+3
+00:00:07,163 --> 00:00:12,671
+who knows the query planner, why a limit exists, who should look at a new issue.
+
+4
+00:00:12,721 --> 00:00:17,405
+Lore reads a project's public GitHub history into FalkorDB,
+
+5
+00:00:17,455 --> 00:00:19,571
+and answers from the graph.
+
+6
+00:00:20,897 --> 00:00:25,845
+Here it's loaded with FalkorDB's own GitHub organisation: six repos,
+
+7
+00:00:25,895 --> 00:00:30,623
+about a hundred and fifty people, thirteen hundred pull requests,
+
+8
+00:00:30,673 --> 00:00:32,535
+refreshed every six hours.
+
+9
+00:00:32,534 --> 00:00:34,439
+I'm signed in with GitHub,
+
+10
+00:00:34,489 --> 00:00:38,572
+so Lore starts by recalling what it remembers about me.
+
+11
+00:00:38,622 --> 00:00:41,972
+Now I ask who knows the query planner.
+
+12
+00:00:42,022 --> 00:00:46,405
+On the right, Under the hood shows every step as it happens:
+
+13
+00:00:46,455 --> 00:00:51,208
+the tool Gemini picks, then the Cypher query it runs on FalkorDB,
+
+14
+00:00:51,258 --> 00:00:52,760
+with rows and timing.
+
+15
+00:00:53,615 --> 00:00:57,665
+Every name comes with the pull requests that prove it.
+
+16
+00:00:57,665 --> 00:01:03,399
+Proof draws that path in the graph: a person, the PRs they wrote or reviewed,
+
+17
+00:01:03,449 --> 00:01:05,278
+and the area of the code.
+
+18
+00:01:05,328 --> 00:01:10,297
+The score behind it is computed inside FalkorDB, from merged PRs,
+
+19
+00:01:10,347 --> 00:01:14,390
+reviews and comments, with recent work counting more.
+
+20
+00:01:15,316 --> 00:01:18,329
+Triage takes a real open issue.
+
+21
+00:01:18,329 --> 00:01:21,838
+Lore works out which areas of the code it touches,
+
+22
+00:01:21,888 --> 00:01:24,970
+finds related past issues and pull requests,
+
+23
+00:01:25,020 --> 00:01:28,316
+and picks an active person who knows that code.
+
+24
+00:01:28,366 --> 00:01:31,541
+Then it drafts a reply with sources.
+
+25
+00:01:31,591 --> 00:01:35,516
+It's a dry run: Lore never posts anywhere.
+
+26
+00:01:41,498 --> 00:01:45,648
+Each signed-in person gets a memory graph of their own.
+
+27
+00:01:45,648 --> 00:01:51,113
+Lore remembers what I asked and the areas I care about, and when I come back,
+
+28
+00:01:51,163 --> 00:01:56,486
+it starts with the pull requests merged in those areas since my last visit.
+
+29
+00:01:56,536 --> 00:01:59,298
+One click forgets everything.
+
+30
+00:02:00,226 --> 00:02:04,451
+Teams runs label propagation over who reviews whom.
+
+31
+00:02:04,451 --> 00:02:10,050
+On FalkorDB it finds the core database group and two groups on the browser app,
+
+32
+00:02:10,100 --> 00:02:13,626
+with PageRank showing who holds each one together.
+
+33
+00:02:13,676 --> 00:02:19,507
+Knowledge risk lists areas with recent work that only one active person knows
+
+34
+00:02:19,557 --> 00:02:19,888
+well.
+
+35
+00:02:21,673 --> 00:02:23,510
+Does it work?
+
+36
+00:02:23,511 --> 00:02:27,578
+We backtested on three hundred real FalkorDB pull requests,
+
+37
+00:02:27,628 --> 00:02:31,835
+rebuilding the graph as it stood the day each one was opened.
+
+38
+00:02:31,886 --> 00:02:36,636
+Lore had a real reviewer in its top three ninety percent of the time,
+
+39
+00:02:36,686 --> 00:02:38,723
+ahead of the simple baselines.
+
+40
+00:02:38,773 --> 00:02:44,210
+The README has the graph model, every Cypher query, and the limits.
+
+41
+00:02:45,094 --> 00:02:50,977
+Lore is open source, runs on FalkorDB, and works on any public project:
+
+42
+00:02:51,027 --> 00:02:54,069
+sign in with GitHub and paste a repo.
+
+43
+00:02:54,069 --> 00:02:56,119
+Thanks for watching.
