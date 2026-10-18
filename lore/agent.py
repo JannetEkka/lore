@@ -29,6 +29,7 @@ Rules:
   one-sentence summary and the ids of the sources you used.
 - About an issue: get_item, then related and suggest_reviewers. Never post anything anywhere: you only draft.
 - First contribution: find_areas for the person's interest, then good_first_issues with those area ids, then who_knows.
+- Questions about the project as a whole (repos, size, how many people): project_overview.
 - If the graph does not hold the answer, say so plainly and say what you looked for.
 - Be brief: a few sentences or a short list."""
 
@@ -39,6 +40,8 @@ def _obj(props, required=()):
 
 S = {"type": "STRING"}
 TOOLS = [
+    {"name": "project_overview", "description": "The project as a whole: which repos are loaded, how many people, PRs, issues and areas, how many people are active, and the time span of the history.",
+     "parameters": _obj({})},
     {"name": "find_areas", "description": "Areas of the code (directories) whose path or files mention the words. Use it to turn a topic into area ids.",
      "parameters": _obj({"text": S}, ["text"])},
     {"name": "who_knows", "description": "People ranked by how well they know the given areas (recent merged PRs, reviews, comments), with the PRs that prove it.",
@@ -66,6 +69,8 @@ TOOLS = [
 
 def execute(g, name, args, trace):
     """Run one tool against the graph."""
+    if name == "project_overview":
+        return queries.project_overview(g, trace=trace)
     if name == "find_areas":
         return queries.find_areas(g, args.get("text", ""), trace=trace)
     if name == "who_knows":

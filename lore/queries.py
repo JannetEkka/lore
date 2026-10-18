@@ -369,3 +369,27 @@ def teams(g, trace=None):
                                  "active": bool(rank.get(m, {}).get("active"))} for m in members],
                     "areas": trace.run(g, f"team_areas:{t['team']}", TEAM_AREAS, {"members": members})})
     return out
+
+
+OVERVIEW = """
+MATCH (r:Repo)
+OPTIONAL MATCH (r)<-[:PART_OF]-(a:Area)
+WITH r, count(a) AS areas
+RETURN r.name AS repo, r.url AS url, areas ORDER BY repo"""
+
+COUNTS = "MATCH (n) UNWIND labels(n) AS kind WITH kind WHERE kind IN ['Person', 'PR', 'Issue', 'Area', 'Repo'] RETURN kind, count(*) AS n"
+
+SPAN = """
+MATCH (i:Item) WHERE i.created_at IS NOT NULL
+RETURN min(i.created_at) AS first, max(i.created_at) AS last"""
+
+
+def project_overview(g, trace=None):
+    """The project as a whole: its repos, how many people, PRs, issues and areas, who's active, the time span."""
+    trace = trace if trace is not None else Trace()
+    counts = {r["kind"]: r["n"] for r in trace.run(g, "counts", COUNTS)}
+    active = trace.run(g, "active_people", "MATCH (p:Person) WHERE p.active RETURN count(p) AS n")[0]["n"]
+    span = trace.run(g, "time_span", SPAN)[0]
+    return {"repos": trace.run(g, "repos", OVERVIEW), "counts": counts, "active_people": active,
+            "history_from": span["first"], "history_to": span["last"],
+            "note": "Only the repos listed here were loaded; the org may have more public repos on GitHub."}

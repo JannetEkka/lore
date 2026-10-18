@@ -47,3 +47,9 @@ def test_risk_knowers_become_proof_people():
     evidence = {"items": {}, "people": set(), "areas": {}}
     agent._evidence([{"area": "r:src/udf", "path": "src/udf", "knowers": ["swilly22"]}], evidence)
     assert evidence["people"] == {"swilly22"} and evidence["areas"] == {"r:src/udf": "src/udf"}
+
+
+def test_project_overview(graph):
+    out = queries.project_overview(graph)
+    assert out["repos"][0]["repo"] == "acme/db"
+    assert out["counts"]["PR"] == 7 and out["counts"]["Issue"] == 4 and out["active_people"] >= 2

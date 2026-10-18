@@ -41,7 +41,7 @@ graph LR
 
 - **Data:** a scheduled GitHub Action fetches the project with GitHub's bulk API endpoints (100 items a call) and a blobless `git clone`. Squash-merged PRs end their commit subject in `(#123)`, so `git log --name-only` gives each merged PR's files without spending API calls. The Action commits a gzipped snapshot; the app loads it at startup and on each redeploy.
 - **Graph:** FalkorDB, embedded with FalkorDBLite by default, or a server / FalkorDB Cloud with `FALKORDB_HOST`. Each project is its own graph; each signed-in person's memory is its own graph too.
-- **Agent:** Gemini with 11 function tools, each a graph query. It may only state what tool results back, and must cite `[owner/repo#n]`. When a model is busy, retired or out of free quota, the next one takes over, and a model that just failed goes to the back of the line for a while. The model list is read from the key, never hard-coded.
+- **Agent:** Gemini with 12 function tools, each a graph query. It may only state what tool results back, and must cite `[owner/repo#n]`. When a model is busy, retired or out of free quota, the next one takes over, and a model that just failed goes to the back of the line for a while. The model list is read from the key, never hard-coded.
 - **App:** FastAPI streaming the agent's steps as server-sent events; plain HTML/JS with Cytoscape.js for the proof graph.
 
 ## Graph data model

@@ -17,7 +17,7 @@
 </div>
 <article class="doc" id="doc"><p class="muted">Loading…</p></article>
 <script>
-fetch('/EXPLAIN.md').then(r => r.text()).then(md => {
+fetch('/README.md').then(r => r.text()).then(md => {
   const doc = document.getElementById('doc');
   doc.innerHTML = marked.parse(md);
   doc.querySelectorAll('code.language-mermaid').forEach(c => {

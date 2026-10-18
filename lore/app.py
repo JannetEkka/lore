@@ -120,6 +120,11 @@ def explain():
     return FileResponse(os.path.join(ROOT, "EXPLAIN.md"), media_type="text/markdown")
 
 
+@app.get("/README.md")
+def readme():
+    return FileResponse(os.path.join(ROOT, "README.md"), media_type="text/markdown")
+
+
 # API ---------------------------------------------------------------------------------------------
 
 @app.get("/api/projects")
@@ -339,7 +344,7 @@ def logout(request: Request):
 def me(request: Request):
     user = _user(request)
     return {"login": user["login"] if user else None, "signin": bool(os.environ.get("GITHUB_CLIENT_ID")),
-            "persistent": bool(os.environ.get("FALKORDB_HOST"))}
+            "persistent": db.is_remote()}
 
 
 # Memory -------------------------------------------------------------------------------------------
