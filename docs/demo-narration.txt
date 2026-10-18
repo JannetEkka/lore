@@ -1,0 +1,15 @@
+This is Lore. Every open-source project carries knowledge that nobody wrote down: who knows the query planner, why a limit exists, who should look at a new issue. Lore reads a project's public GitHub history into FalkorDB, and answers from the graph.
+
+Here it's loaded with FalkorDB's own GitHub organisation: six repos, about a hundred and fifty people, thirteen hundred pull requests, refreshed every six hours. I'm signed in with GitHub, so Lore starts by recalling what it remembers about me. Now I ask who knows the query planner. On the right, Under the hood shows every step as it happens: the tool Gemini picks, then the Cypher query it runs on FalkorDB, with rows and timing.
+
+Every name comes with the pull requests that prove it. Proof draws that path in the graph: a person, the PRs they wrote or reviewed, and the area of the code. The score behind it is computed inside FalkorDB, from merged PRs, reviews and comments, with recent work counting more.
+
+Triage takes a real open issue. Lore works out which areas of the code it touches, finds related past issues and pull requests, and picks an active person who knows that code. Then it drafts a reply with sources. It's a dry run: Lore never posts anywhere.
+
+Each signed-in person gets a memory graph of their own. Lore remembers what I asked and the areas I care about, and when I come back, it starts with the pull requests merged in those areas since my last visit. One click forgets everything.
+
+Teams runs label propagation over who reviews whom. On FalkorDB it finds the core database group and two groups on the browser app, with PageRank showing who holds each one together. Knowledge risk lists areas with recent work that only one active person knows well.
+
+Does it work? We backtested on three hundred real FalkorDB pull requests, rebuilding the graph as it stood the day each one was opened. Lore had a real reviewer in its top three ninety percent of the time, ahead of the simple baselines. The README has the graph model, every Cypher query, and the limits.
+
+Lore is open source, runs on FalkorDB, and works on any public project: sign in with GitHub and paste a repo. Thanks for watching.

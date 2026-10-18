@@ -5,7 +5,7 @@
 Lore turns a public GitHub project's history into a graph in [FalkorDB](https://github.com/FalkorDB/FalkorDB): who wrote and reviewed which PRs, which files each one changed, which issues it fixed, who commented where. An agent then answers from that graph the questions newcomers and maintainers actually ask: who knows this part of the code, why is it built this way, has this come up before, who should look at this issue, where should I start. Every answer shows the tools it chose, the Cypher it ran, and the path through the graph behind it.
 
 - **Live:** https://lore-gh5y.onrender.com (free plan, so the first load after a quiet spell takes up to a minute)
-- **Demo video:** _link added on submission_
+- **Demo video (3 min):** [docs/lore-demo.mp4](docs/lore-demo.mp4), recorded from the running app with a synthetic voice ([narration](docs/demo-narration.txt))
 - **Built for:** [Graph Hacks](https://wemakedevs.org/hackathons/falkordb) (FalkorDB × WeMakeDevs), Oct 15–18, 2026
 - **Tracks:** Company Brain · Agents That Act on Connected Data · Agent Memory and Coordination
 
