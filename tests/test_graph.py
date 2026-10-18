@@ -92,3 +92,17 @@ def test_memory_is_one_graph_per_user(database, graph, monkeypatch):
     assert [c["id"] for c in changed] == ["acme/db#10"]  # merged 10 days ago, after the last visit
     memory.forget("erin")
     assert memory.recall("erin", "acme__db")["questions"] == []
+
+
+def test_last_visit_survives_questions_in_the_same_visit(database, monkeypatch):
+    import time as _t
+    from lore import memory
+    monkeypatch.setattr(memory.db, "connect", lambda path=None: database)
+    memory.forget("gina")
+    now = int(_t.time())
+    memory.mark_seen("gina", "p", now=now - 30 * 86400)   # a visit a month ago
+    memory.mark_seen("gina", "p", now=now)                 # today: a new visit
+    memory.mark_seen("gina", "p", now=now + 60)            # another question in the same visit
+    memory.remember("gina", "p", "q", "a", [], now=now)
+    assert memory.recall("gina", "p")["last_seen"] == now - 30 * 86400
+    memory.forget("gina")

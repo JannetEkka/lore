@@ -45,7 +45,8 @@ def recall(login, project):
         interests = _rows(g, """MATCH (:User {login: $login})-[i:INTERESTED_IN]->(t:Topic {project: $project})
                                 RETURN t.area AS area, t.path AS path, i.weight AS weight, i.last_at AS last_at
                                 ORDER BY i.weight DESC, i.last_at DESC LIMIT 6""", {"login": login, "project": project})
-        seen = _rows(g, """MATCH (:User {login: $login})-[s:SEEN]->(:Project {name: $project}) RETURN s.at AS at""",
+        seen = _rows(g, """MATCH (:User {login: $login})-[s:SEEN]->(:Project {name: $project})
+                           RETURN CASE WHEN s.at < timestamp() / 1000 - 7200 THEN s.at ELSE s.prev END AS at""",
                      {"login": login, "project": project})
     except Exception:  # no memory graph yet
         return {"questions": [], "interests": [], "last_seen": None}
@@ -53,8 +54,13 @@ def recall(login, project):
 
 
 def mark_seen(login, project, now=None):
+    """Record activity. `prev` keeps when the previous visit happened (a gap of 2 hours starts a new visit),
+    so "since your last visit" doesn't reset with every question."""
     graph(login).query("""MERGE (u:User {login: $login}) MERGE (p:Project {name: $project})
-                          MERGE (u)-[s:SEEN]->(p) SET s.at = $now""",
+                          MERGE (u)-[s:SEEN]->(p)
+                          SET s.prev = CASE WHEN s.at IS NULL THEN $now
+                                            WHEN s.at < $now - 7200 THEN s.at ELSE coalesce(s.prev, s.at) END,
+                              s.at = $now""",
                        {"login": login, "project": project, "now": now or int(time.time())})
 
 

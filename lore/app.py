@@ -228,12 +228,22 @@ class Proof(BaseModel):
     areas: list[str] = []
 
 
+# Only the PRs the answer cited, and the areas they touched. With no cited PRs (a knowledge-risk answer),
+# each person's three most recent PRs in the named areas.
 PROOF_WORK = """
 MATCH (p:Person)-[r:AUTHORED|REVIEWED]->(pr:PR)-[:TOUCHES]->(:File)-[:IN]->(a:Area)
-WHERE p.login IN $people AND (pr.id IN $items OR a.id IN $areas)
+WHERE p.login IN $people AND pr.id IN $items AND (size($areas) = 0 OR a.id IN $areas)
 RETURN DISTINCT p.login AS person, type(r) AS rel, pr.id AS pr, pr.title AS title, pr.url AS url,
        a.id AS area, a.path AS path
-LIMIT 300"""
+LIMIT 120"""
+
+PROOF_AREAS = """
+MATCH (p:Person)-[r:AUTHORED|REVIEWED]->(pr:PR)-[:TOUCHES]->(:File)-[:IN]->(a:Area)
+WHERE p.login IN $people AND a.id IN $areas
+WITH DISTINCT p, r, pr, a ORDER BY coalesce(pr.merged_at, pr.created_at) DESC
+WITH p, a, collect({rel: type(r), pr: pr})[0..3] AS recent
+UNWIND recent AS x
+RETURN p.login AS person, x.rel AS rel, x.pr.id AS pr, x.pr.title AS title, x.pr.url AS url, a.id AS area, a.path AS path"""
 
 PROOF_LINKS = """
 MATCH (x:Item)-[r:FIXES|REFERS_TO]->(y:Item)
@@ -248,7 +258,10 @@ def proof(req: Proof):
     trace = queries.Trace()
     params = {"people": req.people, "items": req.items, "areas": req.areas}
     nodes, edges = {}, []
-    for row in trace.run(g, "proof_work", PROOF_WORK, params):
+    rows = trace.run(g, "proof_work", PROOF_WORK, params)
+    if not rows and req.areas:
+        rows = trace.run(g, "proof_areas", PROOF_AREAS, params)
+    for row in rows:
         nodes[row["person"]] = {"id": row["person"], "label": "@" + row["person"], "kind": "person"}
         nodes[row["pr"]] = {"id": row["pr"], "label": "#" + row["pr"].split("#")[1], "title": row["title"],
                             "url": row["url"], "kind": "pr"}
