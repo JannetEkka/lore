@@ -4,8 +4,9 @@
 
 Lore turns a public GitHub project's history into a graph in [FalkorDB](https://github.com/FalkorDB/FalkorDB): who wrote and reviewed which PRs, which files each one changed, which issues it fixed, who commented where. An agent then answers from that graph the questions newcomers and maintainers actually ask: who knows this part of the code, why is it built this way, has this come up before, who should look at this issue, where should I start. Every answer shows the tools it chose, the Cypher it ran, and the path through the graph behind it.
 
-- **Live:** https://lore-gh5y.onrender.com (free plan, so the first load after a quiet spell takes up to a minute)
-- **Demo video (3 min):** [docs/lore-demo.mp4](docs/lore-demo.mp4), recorded from the running app with a synthetic voice and burned-in captions ([narration](docs/demo-narration.txt), [subtitles](docs/lore-demo.srt))
+- **Live:** https://lore-gh5y.onrender.com, with the graphs on FalkorDB Cloud (free plans, so the first load after a quiet spell takes up to a minute)
+- **Demo video (3 min):** https://youtu.be/V-Ifwi_jxhg (also in the repo: [docs/lore-demo.mp4](docs/lore-demo.mp4), with [subtitles](docs/lore-demo.srt))
+- **Blog post:** [I built a company brain for open-source projects on FalkorDB](https://medium.com/@jannetaekka/i-built-a-company-brain-for-open-source-projects-on-falkordb-47f519f9ce08)
 - **Built for:** [Graph Hacks](https://wemakedevs.org/hackathons/falkordb) (FalkorDB × WeMakeDevs), Oct 15–18, 2026
 - **Tracks:** Company Brain · Agents That Act on Connected Data · Agent Memory and Coordination
 
