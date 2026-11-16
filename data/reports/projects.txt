@@ -1,11 +1,11 @@
 # Projects to run lore.report on (one owner/repo per line). The Report workflow reads this file.
-FalkorDB/GraphRAG-SDK
-mozilla-ai/otari
-ossf/scorecard
-neo4j/neo4j-graphrag-python
-memgraph/memgraph
-apache/age
-oxigraph/oxigraph
-terminusdb/terminusdb
-Pometry/Raphtory
-pgmpy/pgmpy
+pylint-dev/pylint
+nilearn/nilearn
+torchgeo/torchgeo
+pymc-labs/pymc-marketing
+deepinv/deepinv
+sunlabuiuc/PyHealth
+PyCalendar/icalendar
+jelmer/dulwich
+widgetti/solara
+embeddings-benchmark/mteb
