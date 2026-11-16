@@ -1,0 +1,48 @@
+# Runs Lore on a list of public projects and prints a short "who knows what" report for each
+# (lore/report.py): merged PRs, who wrote and reviewed them, and areas that rest on one person.
+# Nothing is committed: the report goes to the job summary and an artifact.
+name: Report
+
+on:
+  workflow_dispatch:
+    inputs:
+      repos:
+        description: "Comma-separated owner/repo list (empty: data/reports/projects.txt)"
+        required: false
+  pull_request:
+    paths: ["data/reports/projects.txt", "lore/report.py", ".github/workflows/report.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Fetch and report
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOS: ${{ inputs.repos }}
+          PYTHONUNBUFFERED: "1"
+        run: |
+          mkdir -p out
+          if [ -n "$REPOS" ]; then echo "$REPOS" | tr ',' '\n'; else grep -v '^#' data/reports/projects.txt; fi | sed '/^\s*$/d' > out/list.txt
+          while read -r repo; do
+            name=$(echo "$repo" | tr '/' '_')
+            echo "::group::$repo"
+            python -m lore fetch "$repo" --repos "$repo" --months 6 --max-prs 300 --max-review-calls 50 --out "out/$name.json.gz" || echo "fetch failed: $repo"
+            echo "::endgroup::"
+          done < out/list.txt
+          python -m lore.report out/*.json.gz --months 6 | tee out/report.md
+          cat out/report.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lore-report
+          path: out/
