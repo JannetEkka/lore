@@ -12,6 +12,7 @@ import datetime
 import gzip
 import json
 
+from . import coverage
 from .areas import assign, is_ignored, plan_areas
 
 
@@ -30,6 +31,8 @@ def _is_bot(login):
 def summarise(snap, months=6, top=5):
     """One dict per repo: merged PRs, people, and the areas that rest on one person."""
     cut = snap["fetched_at"] - months * 30.5 * 86400
+    cov = coverage.measure(snap)
+    cov_by_repo = {c["repo"]: c for c in cov["repos"]}
     out = []
     for repo in snap["repos"]:
         reviewers = collections.defaultdict(set)
@@ -78,6 +81,8 @@ def summarise(snap, months=6, top=5):
                               for a, c in busiest],
             "open_issues": len(open_issues),
             "has_approvals": snap.get("has_approvals", False),
+            "coverage": cov_by_repo.get(repo["name"], {}),
+            "partial": cov["partial"],
             "incomplete": snap.get("incomplete", []),
         })
     return out
@@ -87,6 +92,17 @@ def to_markdown(rows, months):
     lines = []
     for r in rows:
         lines.append(f"## {r['repo']}")
+        c = r.get("coverage") or {}
+        if r.get("partial") and c:
+            gaps = []
+            if c.get("files_for", 0) < c.get("merged", 0):
+                gaps.append(f"files known for {c['files_for']:,} of {c['merged']:,} merged PRs")
+            if r["has_approvals"] and c.get("approvals_for", 0) < c.get("merged", 0):
+                gaps.append(f"review approvals read for the {c['approvals_for']:,} most recent")
+            if c.get("pr_cap_hit"):
+                gaps.append("older PRs not listed")
+            if gaps:
+                lines.append("- **Based on partial data:** " + "; ".join(gaps) + ". People outside that data are invisible here.")
         lines.append(f"- Last {months} months: {r['merged_prs']} merged PRs by {r['authors']} people; "
                      f"open issues in the snapshot: {r['open_issues']}.")
         if r["top_authors"] and r["merged_prs"]:
@@ -94,14 +110,16 @@ def to_markdown(rows, months):
             names = " and ".join(f"@{a} ({n})" for a, n in r["top_authors"][:2])
             lines.append(f"- {names} authored {share:.0%} of them.")
         if r["single_person_areas"]:
-            lines.append("- Areas where every merged PR in the window was written and reviewed by one person:")
+            lines.append("- Areas where every merged PR in the window was written and reviewed by one person"
+                         + (" in the fetched data:" if r.get("partial") else ":"))
             for s in r["single_person_areas"]:
                 ex = ", ".join(f"#{n}" for n in s["examples"])
                 lines.append(f"  - `{s['area']}`: {s['prs']} PRs, all @{s['person']} (e.g. {ex})")
         else:
             lines.append("- No area with 3+ merged PRs rests on a single person in the window.")
         if r["one_author_areas"]:
-            lines.append("- Areas where one person wrote at least 80% of the merged PRs:")
+            lines.append("- Areas where one person wrote at least 80% of the merged PRs"
+                         + (" in the fetched data:" if r.get("partial") else ":"))
             for m in r["one_author_areas"]:
                 lines.append(f"  - `{m['area']}`: @{m['person']} wrote {m['wrote']} of {m['prs']}")
         lines.append("- Busiest areas: " + "; ".join(

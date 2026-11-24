@@ -20,7 +20,7 @@ from fastapi.responses import FileResponse, JSONResponse, RedirectResponse, Stre
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from . import agent, db, github, memory, queries
+from . import agent, coverage, db, github, memory, queries
 from .config import Caps
 from .__main__ import read_snapshot
 from .load import LOADER_VERSION, load_snapshot
@@ -60,7 +60,7 @@ def _load_snapshots():
                     {"f": snap["fetched_at"], "t": snap["target"], "v": LOADER_VERSION})
         stats = _stats(g)
         PROJECTS[name] = {"name": name, "target": snap["target"], "fetched_at": snap["fetched_at"],
-                          "repos": [r["name"] for r in snap["repos"]], "stats": stats}
+                          "repos": [r["name"] for r in snap["repos"]], "stats": stats, "coverage": coverage.measure(snap)}
 
 
 REGISTRY = "lore__registry"
@@ -74,14 +74,16 @@ def _load_registry():
     """User-added projects live in their own graphs; the registry lists them so they come back after a restart."""
     conn = db.connect()
     try:
-        rows = conn.select_graph(REGISTRY).query("MATCH (p:Project) RETURN p.name, p.target, p.fetched_at, p.repos, p.added_by").result_set
+        rows = conn.select_graph(REGISTRY).query(
+            "MATCH (p:Project) RETURN p.name, p.target, p.fetched_at, p.repos, p.added_by, p.coverage").result_set
     except Exception:
         return
-    for name, target, fetched_at, repos, added_by in rows:
+    for name, target, fetched_at, repos, added_by, cov in rows:
         if name not in PROJECTS:
             try:
                 PROJECTS[name] = {"name": name, "target": target, "fetched_at": fetched_at, "repos": repos,
-                                  "stats": _stats(conn.select_graph(name)), "added_by": added_by}
+                                  "stats": _stats(conn.select_graph(name)), "added_by": added_by,
+                                  "coverage": _coverage_from(cov)}
             except Exception:
                 pass
 
@@ -90,6 +92,23 @@ def _load_registry():
 def startup():
     _load_snapshots()
     _load_registry()
+
+
+def _coverage_from(stored):
+    """A user-added project's coverage, as saved in the registry. Projects added before coverage was recorded
+    say so instead of passing as complete."""
+    try:
+        return json.loads(stored) if stored else UNKNOWN_COVERAGE
+    except (TypeError, ValueError):
+        return UNKNOWN_COVERAGE
+
+
+UNKNOWN_COVERAGE = {"partial": True, "summary": "This project was added before Lore recorded how much of its history "
+                    "it read, so treat its results as partial until it is added again", "details": []}
+
+
+def _coverage(project):
+    return PROJECTS.get(project, {}).get("coverage") or UNKNOWN_COVERAGE
 
 
 def _graph(project):
@@ -163,7 +182,8 @@ def issues(project: str, filter: str = "newest"):
 @app.get("/api/risk")
 def risk(project: str):
     trace = queries.Trace()
-    return {"areas": queries.knowledge_risk(_graph(project), trace=trace), "trace": trace}
+    return {"areas": queries.knowledge_risk(_graph(project), trace=trace), "trace": trace,
+            "coverage": _coverage(project)}
 
 
 class Ask(BaseModel):
@@ -196,7 +216,8 @@ def ask(req: Ask, request: Request):
         failed = False
         if memory_event:
             yield f"data: {json.dumps(memory_event, default=str)}\n\n"
-        for e in agent.run(g, req.question, target, model=req.model, key=req.key or None, user_note=note):
+        for e in agent.run(g, req.question, target, model=req.model, key=req.key or None, user_note=note,
+                           cov=_coverage(req.project)):
             if e["type"] == "answer" and user:
                 memory.remember(user["login"], req.project, req.question, e["text"], e["evidence"]["areas"])
                 memory.mark_seen(user["login"], req.project)
@@ -281,7 +302,7 @@ def proof(req: Proof):
 @app.get("/api/teams")
 def teams(project: str):
     trace = queries.Trace()
-    return {"teams": queries.teams(_graph(project), trace=trace), "trace": trace}
+    return {"teams": queries.teams(_graph(project), trace=trace), "trace": trace, "coverage": _coverage(project)}
 
 
 # Sign in with GitHub ------------------------------------------------------------------------------
@@ -405,11 +426,14 @@ def _build(name, target, token, login):
         g.query("MERGE (m:Meta) SET m.fetched_at = $f, m.target = $t, m.version = $v",
                 {"f": snap["fetched_at"], "t": target, "v": LOADER_VERSION})
         repos = [r["name"] for r in snap["repos"]]
+        cov = coverage.measure(snap)
         db.connect().select_graph(REGISTRY).query(
-            "MERGE (p:Project {name: $n}) SET p.target = $t, p.fetched_at = $f, p.repos = $r, p.added_by = $by",
-            {"n": name, "t": target, "f": snap["fetched_at"], "r": repos, "by": login})
+            "MERGE (p:Project {name: $n}) SET p.target = $t, p.fetched_at = $f, p.repos = $r, p.added_by = $by, p.coverage = $c",
+            {"n": name, "t": target, "f": snap["fetched_at"], "r": repos, "by": login, "c": json.dumps(cov)})
         PROJECTS[name] = {"name": name, "target": target, "fetched_at": snap["fetched_at"], "repos": repos,
-                          "stats": _stats(g), "added_by": login}
+                          "stats": _stats(g), "added_by": login, "coverage": cov}
+        if cov["partial"]:
+            job["log"].append("Partial data: " + cov["summary"] + ".")
         job["log"].append("Done: " + ", ".join(f"{v} {k}" for k, v in counts.items()))
         job["status"] = "done"
     except Exception as e:

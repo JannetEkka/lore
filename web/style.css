@@ -110,3 +110,14 @@ table.grid th { font-size: 12px; color: var(--muted); font-weight: 600; text-tra
 .doc table { border-collapse: collapse; width: 100%; font-size: 14px; display: block; overflow-x: auto; }
 .doc th, .doc td { border: 1px solid var(--line); padding: 6px 8px; text-align: left; }
 .doc .mermaid { background: var(--panel); border-radius: 10px; padding: 12px; }
+
+/* Partial data (lore/coverage.py): a banner in every result view, a badge per row, a watermark on lists. */
+.partial-banner { display: flex; gap: 10px; align-items: flex-start; background: var(--amber-soft); color: var(--amber); border: 1px solid var(--amber); border-left-width: 5px; border-radius: 10px; padding: 10px 12px; margin: 0 0 12px; font-size: 14px; }
+.partial-banner details { margin-top: 4px; font-size: 13px; }
+.partial-banner ul { margin: 4px 0; padding-left: 18px; }
+.partial-icon { flex: none; width: 20px; height: 20px; border-radius: 50%; background: var(--amber); color: var(--amber-soft); font-weight: 700; font-size: 13px; line-height: 20px; text-align: center; margin-top: 1px; }
+.partial-badge { display: inline-block; background: var(--amber-soft); color: var(--amber); border: 1px solid var(--amber); border-radius: 999px; padding: 0 8px; font-size: 11px; font-weight: 600; line-height: 18px; text-transform: uppercase; letter-spacing: 0.03em; white-space: nowrap; vertical-align: 1px; }
+.partial-list { position: relative; }
+.partial-list::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.09; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='340' height='150'%3E%3Ctext x='170' y='85' font-family='system-ui,sans-serif' font-size='19' font-weight='700' fill='%23b7791f' text-anchor='middle' transform='rotate(-18 170 75)'%3EBASED ON PARTIAL DATA%3C/text%3E%3C/svg%3E"); }
+.caveat { background: var(--amber-soft); color: var(--amber); border-radius: 10px; padding: 10px 12px; margin: 0 0 10px; font-size: 14px; }
+.caveat ul { margin: 4px 0; padding-left: 18px; }

@@ -11,12 +11,25 @@ import os
 
 from mcp.server.mcpserver import MCPServer
 
-from . import db, queries
+from . import coverage, db, queries
 from .__main__ import read_snapshot
 from .load import load_snapshot
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 mcp = MCPServer("lore")
+
+
+def _snapshot(project):
+    for path in glob.glob(os.path.join(ROOT, "data", "snapshots", "*.json*")):
+        snap = read_snapshot(path)
+        if db.graph_name(snap["target"]) == db.graph_name(project):
+            return snap
+    return None
+
+
+def _coverage(project):
+    snap = _snapshot(project)
+    return coverage.measure(snap) if snap else {"partial": True, "summary": "No snapshot on disk, so how much of the history was read is unknown", "details": []}
 
 
 def _graph(project):
@@ -64,9 +77,18 @@ def search_history(project: str, text: str) -> list:
 
 
 @mcp.tool()
-def knowledge_risk(project: str) -> list:
-    """Areas with recent work that at most one active person knows well."""
-    return queries.knowledge_risk(_graph(project))
+def knowledge_risk(project: str) -> dict:
+    """Areas with recent work that at most one active person knows well IN THE FETCHED DATA. Read `coverage`
+    first: when it is partial, say "based on the fetched data" and never state a bus factor of one as fact."""
+    cov = _coverage(project)
+    return {"coverage": {k: cov[k] for k in ("partial", "summary", "details")}, "areas": queries.knowledge_risk(_graph(project))}
+
+
+@mcp.tool()
+def data_coverage(project: str) -> dict:
+    """How much of the project's history Lore read: merged PRs with known files, review approvals, caps hit.
+    When partial, people outside the fetched data are invisible, so no answer proves an absence."""
+    return _coverage(project)
 
 
 @mcp.tool()

@@ -15,6 +15,7 @@ import os
 import re
 import subprocess
 import time
+from dataclasses import asdict
 from datetime import datetime, timedelta, timezone
 
 import requests
@@ -136,7 +137,7 @@ def org_repos(gh, org, caps):
         repos = list(gh.pages(f"/users/{org}/repos", {"sort": "pushed"}, max_pages=2))
     repos = [r for r in repos if not r.get("fork") and not r.get("archived")]
     repos.sort(key=lambda r: r.get("pushed_at") or "", reverse=True)
-    return [r["full_name"] for r in repos[: caps.max_repos]]
+    return [r["full_name"] for r in repos[: caps.max_repos]], len(repos)
 
 
 def git_pr_files(full, since, git_dir):
@@ -159,9 +160,15 @@ def fetch_repo(gh, full, since, caps, git_dir, log=print):
     since_iso = since.strftime("%Y-%m-%dT%H:%M:%SZ")
     url = f"https://github.com/{full}"
 
+    # What each list was cut at, so results can say how much of the history they rest on (lore/coverage.py).
+    limits = {"pr_cap_hit": False, "issue_cap_hit": False, "comment_cap_hit": False,
+              "review_comment_cap_hit": False, "approvals_for": 0}
     prs = []
     for p in gh.pages(f"/repos/{full}/pulls", {"state": "all", "sort": "created", "direction": "desc"}):
-        if p["created_at"] < since_iso or len(prs) >= caps.max_prs:
+        if p["created_at"] < since_iso:
+            break
+        if len(prs) >= caps.max_prs:
+            limits["pr_cap_hit"] = True
             break
         if is_bot(p["user"]):
             continue
@@ -178,7 +185,10 @@ def fetch_repo(gh, full, since, caps, git_dir, log=print):
 
     issues = []
     for i in gh.pages(f"/repos/{full}/issues", {"state": "all", "sort": "created", "direction": "desc"}):
-        if i["created_at"] < since_iso or len(issues) >= caps.max_issues:
+        if i["created_at"] < since_iso:
+            break
+        if len(issues) >= caps.max_issues:
+            limits["issue_cap_hit"] = True
             break
         if "pull_request" in i or is_bot(i["user"]):
             continue
@@ -194,24 +204,31 @@ def fetch_repo(gh, full, since, caps, git_dir, log=print):
     log(f"  {full}: {len(issues)} issues")
 
     # Conversation comments on issues and PRs (one endpoint covers both: they share numbers).
-    comments = []
+    comments, seen = [], 0
     for c in gh.pages(f"/repos/{full}/issues/comments", {"since": since_iso, "sort": "created", "direction": "desc"},
                       max_pages=caps.max_comment_pages):
+        seen += 1
         if not is_bot(c["user"]):
             comments.append({"number": int(c["issue_url"].rsplit("/", 1)[1]), "author": c["user"]["login"],
                              "at": iso_to_epoch(c["created_at"])})
 
+    limits["comment_cap_hit"] = seen >= caps.max_comment_pages * 100
+
     # Review comments on PR diffs: each one means that person reviewed that PR.
-    reviews = []
+    reviews, seen = [], 0
     for c in gh.pages(f"/repos/{full}/pulls/comments", {"since": since_iso, "sort": "created", "direction": "desc"},
                       max_pages=caps.max_comment_pages):
+        seen += 1
         if not is_bot(c["user"]):
             reviews.append({"pr": int(c["pull_request_url"].rsplit("/", 1)[1]), "author": c["user"]["login"],
                             "state": "COMMENTED", "at": iso_to_epoch(c["created_at"])})
 
+    limits["review_comment_cap_hit"] = seen >= caps.max_comment_pages * 100
+
     # Approvals and change requests have no bulk endpoint: one call per merged PR, so token only.
     if gh.has_token:
         for p in [p for p in prs if p["state"] == "merged"][: caps.max_review_calls]:
+            limits["approvals_for"] += 1
             for r in gh.get(f"/repos/{full}/pulls/{p['number']}/reviews", {"per_page": 100}):
                 if not is_bot(r.get("user")) and r["user"]["login"] != p["author"] and r.get("submitted_at"):
                     reviews.append({"pr": p["number"], "author": r["user"]["login"], "state": r["state"],
@@ -223,7 +240,8 @@ def fetch_repo(gh, full, since, caps, git_dir, log=print):
         p["files"] = files.get(p["number"], [])
     log(f"  {full}: files for {sum(1 for p in prs if p['files'])} merged PRs from git")
 
-    return {"name": full, "url": url, "prs": prs, "issues": issues, "comments": comments, "reviews": reviews}
+    return {"name": full, "url": url, "prs": prs, "issues": issues, "comments": comments, "reviews": reviews,
+            "limits": limits}
 
 
 def fetch(target, data_dir, token=None, caps=None, repos=None, log=print):
@@ -231,12 +249,17 @@ def fetch(target, data_dir, token=None, caps=None, repos=None, log=print):
     caps = caps or Caps()
     gh = GitHub(token, cache_dir=os.path.join(data_dir, "cache"))
     since = datetime.now(timezone.utc) - timedelta(days=30 * caps.months)
+    org_total = None
     if repos is None:
-        repos = [target] if "/" in target else org_repos(gh, target, caps)
+        if "/" in target:
+            repos = [target]
+        else:
+            repos, org_total = org_repos(gh, target, caps)
     log(f"Fetching {len(repos)} repo(s) since {since.date()} ({'token' if token else 'no token: 60 calls/hour'})")
     snapshot = {
         "target": target, "since": int(since.timestamp()), "fetched_at": int(time.time()),
         "has_approvals": gh.has_token, "repos": [], "incomplete": [],
+        "caps": asdict(caps), "org_repos_total": org_total,
     }
     for full in repos:
         try:
