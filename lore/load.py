@@ -32,11 +32,27 @@ def create_indexes(g):
             g.query(f"CREATE INDEX FOR (n:{label}) ON (n.{prop})")
         except Exception:
             pass  # already there
+    # Full-text search over PR and issue titles and descriptions (FalkorDB's built-in RediSearch index).
+    # FalkorDB 4.x takes the Cypher form; older servers only the procedure. Neither may fail silently: without
+    # this index search_history finds nothing (falkordblite 0.12 dropped the procedure's 3-argument form).
+    if not _has_fulltext(g):
+        for q in ("CREATE FULLTEXT INDEX FOR (i:Item) ON (i.title, i.body)",
+                  "CALL db.idx.fulltext.createNodeIndex('Item', 'title', 'body')"):
+            try:
+                g.query(q)
+                break
+            except Exception:
+                continue
+        if not _has_fulltext(g):
+            raise RuntimeError("Couldn't create the full-text index on Item(title, body): search would find nothing")
+
+
+def _has_fulltext(g):
     try:
-        # Full-text search over PR and issue titles and descriptions (FalkorDB's built-in RediSearch index).
-        g.query("CALL db.idx.fulltext.createNodeIndex('Item', 'title', 'body')")
+        rows = g.query("CALL db.indexes() YIELD label, properties, types RETURN label, properties, types").result_set
     except Exception:
-        pass
+        return False
+    return any(label == "Item" and "title" in props and "FULLTEXT" in str(types) for label, props, types in rows)
 
 
 def rows_from_snapshot(snap):
