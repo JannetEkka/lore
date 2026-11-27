@@ -194,6 +194,17 @@ pip install "mcp>=2" && claude mcp add lore -- python -m lore.mcp_server   # Lor
 
 Public GitHub data only. Lore keeps GitHub logins, never emails or names, and skips bots. Sign-in asks GitHub for no permissions, so Lore can only read public data. Triage drafts are never posted. A person's memory is a separate graph they can delete with one click.
 
+## Partial data
+
+Who knows which area comes only from what Lore fetched: merged PRs whose files git could tie to them, reviews, approvals and comments. When a fetch hits a cap, GitHub's rate limit, or PRs git can't tie to files, people outside that data are invisible, so "only @x knows this" can be an artefact of the fetch. Anna's App Review of [Lore for Anna](https://github.com/JannetEkka/anna-lore) found this on Oct 28, 2026; this repo has the same fix:
+
+- The fetcher records which caps it hit (`limits` per repo in the snapshot), and `lore/coverage.py` measures what the snapshot holds. Older snapshots are measured with the default caps.
+- Every result view (Ask and Triage answers, Knowledge risk, Teams) carries a "Based on partial data" banner with the numbers, and a per-repo breakdown. The header shows a "partial data" badge, and Knowledge risk rows say "Based on fetched data, only @x knows it well".
+- The model is told in its instructions, and again in each result about people, to say "based on the fetched data" and never to state a bus factor of one as fact. Its answer is then checked (`absolute_claims`), and a sentence that still states an absence as fact is quoted in a "Read with care" note above it.
+- `lore.report` and the MCP server's `knowledge_risk` (plus a `data_coverage` tool) say the same.
+
+On the FalkorDB snapshot of Nov 24, 2026: files are known for 1,013 of 1,178 merged PRs, approvals were read for the 150 most recent merged PRs per repo, and FalkorDB/FalkorDB's 500 most recent PRs reach back only to Sep 1, 2026. Screenshots: `docs/partial-data/`.
+
 ## Limits
 
 - Without a token there are no approvals, only review comments. The scheduled Action uses one, so the ready-made projects have approvals.

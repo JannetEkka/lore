@@ -6,7 +6,8 @@ run() is a generator of events, so the app can show each step as it happens ("Un
   {"type": "query", "step", "cypher", "rows", "ms"}   each Cypher query that tool ran
   {"type": "result", "tool", "summary", "data"}       what came back
   {"type": "fallback", "from", "reason"}       a model failed (usually its free limit); the next one takes over
-  {"type": "answer", "text", "model", "evidence"}
+  {"type": "answer", "text", "model", "evidence", "partial", "caveats"}
+      caveats: sentences that state an absence as fact ("only @x knows it") while the data is partial
   {"type": "error", "message"}
 """
 import json
@@ -14,7 +15,7 @@ import os
 
 import requests
 
-from . import queries
+from . import coverage, queries
 from .models import API, fallback_order, list_models
 
 SYSTEM = """You are Lore. You know the open-source project "{project}" through a graph of its public GitHub history:
@@ -160,7 +161,11 @@ def _call(model, key, body):
     return r.json(), None
 
 
-def run(g, question, project, model=None, key=None, max_steps=8, user_note=None):
+# Tools whose results are about who knows what: while the data is partial, each result carries the reminder.
+PEOPLE_TOOLS = {"who_knows", "suggest_reviewers", "knowledge_risk", "teams", "project_overview"}
+
+
+def run(g, question, project, model=None, key=None, max_steps=8, user_note=None, cov=None):
     key = key or os.environ.get("GEMINI_API_KEY")
     if not key:
         yield {"type": "error", "message": "No Gemini key: set GEMINI_API_KEY or paste your own key."}
@@ -170,8 +175,10 @@ def run(g, question, project, model=None, key=None, max_steps=8, user_note=None)
     except requests.RequestException as e:
         yield {"type": "error", "message": f"Couldn't list Gemini models: {e}"}
         return
+    note = coverage.data_note(cov)
+    system = SYSTEM.format(project=project) + "".join("\n\n" + x for x in (note, user_note) if x)
     body = {
-        "systemInstruction": {"parts": [{"text": SYSTEM.format(project=project) + ("\n\n" + user_note if user_note else "")}]},
+        "systemInstruction": {"parts": [{"text": system}]},
         "contents": [{"role": "user", "parts": [{"text": question}]}],
         "tools": [{"functionDeclarations": TOOLS}],
         "generationConfig": {"temperature": 0.2},
@@ -198,7 +205,8 @@ def run(g, question, project, model=None, key=None, max_steps=8, user_note=None)
             text = "".join(p.get("text", "") for p in content["parts"] if not p.get("thought"))
             yield {"type": "answer", "text": text.strip(), "model": order[i],
                    "evidence": {"items": list(evidence["items"].values()), "people": sorted(evidence["people"]),
-                                "areas": [{"id": k, "path": v} for k, v in evidence["areas"].items()]}}
+                                "areas": [{"id": k, "path": v} for k, v in evidence["areas"].items()]},
+                   "partial": bool(cov and cov.get("partial")), "caveats": coverage.absolute_claims(cov, text)}
             return
         responses = []
         for c in calls:
@@ -215,6 +223,9 @@ def run(g, question, project, model=None, key=None, max_steps=8, user_note=None)
             yield {"type": "result", "tool": c["name"], "summary": _summary(result), "data": result}
             payload = json.loads(json.dumps(result, default=str))
             resp = {"name": c["name"], "response": {"result": payload}}
+            if note and c["name"] in PEOPLE_TOOLS:
+                resp["response"]["data_note"] = ("Partial data: " + cov["summary"] + ". Say 'based on the fetched data'; "
+                                                 "never state that only one person knows something as fact.")
             if c.get("id"):
                 resp["id"] = c["id"]
             responses.append({"functionResponse": resp})

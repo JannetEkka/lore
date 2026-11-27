@@ -27,6 +27,7 @@ jobs:
         run: |
           docker run -d -p 8000:8000 --name lore lore
           for i in $(seq 1 60); do curl -sf localhost:8000/api/projects > projects.json && break; sleep 2; done
+          if [ ! -s projects.json ]; then echo "The app never answered:"; docker logs lore | tail -60; exit 1; fi
           cat projects.json | head -c 600; echo
           curl -sf localhost:8000/ > /dev/null
           curl -sf "localhost:8000/api/issues?project=FalkorDB" | head -c 300; echo

@@ -43,6 +43,23 @@ function md(text) {
   return out.join('');
 }
 
+// ---------- partial data (lore/coverage.py) ----------
+function cov() { return state.projects?.find((x) => x.name === state.project)?.coverage || { partial: false }; }
+function partialBanner(lead = '') {
+  const c = cov();
+  if (!c.partial) return '';
+  const details = (c.details || []).length
+    ? `<details><summary>Per repo</summary><ul>${c.details.map((d) => `<li>${esc(d)}</li>`).join('')}</ul></details>` : '';
+  return `<div class="partial-banner" role="note"><span class="partial-icon" aria-hidden="true">!</span>
+    <div><strong>Based on partial data:</strong> ${esc(c.summary)}.${lead ? ' ' + esc(lead) : ''}${details}</div></div>`;
+}
+const partialBadge = () => (cov().partial ? ' <span class="partial-badge" title="Lore read only part of this project\'s history">partial data</span>' : '');
+function caveatNote(caveats) {
+  if (!caveats?.length) return '';
+  return `<div class="caveat" role="note"><strong>Read with care.</strong> This text states something as fact that partial data can't prove:
+    <ul>${caveats.slice(0, 3).map((c) => `<li>&ldquo;${esc(c)}&rdquo;</li>`).join('')}</ul>People whose work Lore didn't fetch may know this code too.</div>`;
+}
+
 // ---------- setup ----------
 async function init() {
   const [projects, models, me] = await Promise.all([fetch('/api/projects').then((r) => r.json()), fetch('/api/models').then((r) => r.json()),
@@ -80,7 +97,8 @@ function pickProject() {
   }
   state.project = $('project').value;
   const p = state.projects.find((x) => x.name === state.project);
-  $('fresh').textContent = p ? `data from ${new Date(p.fetched_at * 1000).toLocaleString()}` : '';
+  $('fresh').innerHTML = p ? `data from ${esc(new Date(p.fetched_at * 1000).toLocaleString())}${p.coverage?.partial
+    ? ` <span class="partial-badge" title="${esc(p.coverage.summary)}">partial data</span>` : ''}` : '';
   $('chips').innerHTML = (SUGGESTED[state.project] || SUGGESTED._).map((q) => `<button class="chip">${esc(q)}</button>`).join('');
   $('chips').querySelectorAll('.chip').forEach((c) => (c.onclick = () => { $('question').value = c.textContent; ask(c.textContent, { suggested: true }); }));
   if (state.mode === 'triage') loadIssues();
@@ -114,7 +132,7 @@ $('firstbtn').onclick = () => {
   const skills = $('skills').value.trim() || 'some programming', interest = $('interest').value.trim() || 'anything useful';
   ask(`I know ${skills} and I'm interested in ${interest}. Plan my first contribution to this project: which docs or code to read first, a good first issue near that interest, and who reviews that area.`, { head: 'Your first contribution' });
 };
-$('copybtn').onclick = () => navigator.clipboard.writeText($('answerbody').innerText).then(() => ($('copybtn').textContent = 'Copied'));
+$('copybtn').onclick = () => navigator.clipboard.writeText(($('answertext') || $('answerbody')).innerText).then(() => ($('copybtn').textContent = 'Copied'));
 $('ifilter').onchange = loadIssues;
 $('keybtn').onclick = () => {
   const k = prompt('Paste your own free Gemini API key (from aistudio.google.com). It is kept in this tab only and sent with your questions, never stored on the server. Leave empty to use Lore\'s key.', '');
@@ -139,10 +157,18 @@ async function loadRisk() {
   const r = await fetch(`/api/risk?project=${encodeURIComponent(state.project)}`).then((x) => x.json());
   resetSteps();
   r.trace.forEach((q) => addQuery(q, $('steps')));
-  $('riskbody').innerHTML = r.areas.length ? `<table class="grid"><tr><th>Area</th><th>Merged PRs, 180 days</th><th>Active people who know it well</th></tr>
+  const partial = !!r.coverage?.partial;
+  const who = (k) => `<a href="https://github.com/${esc(k)}" target="_blank" rel="noopener">@${esc(k)}</a>`;
+  const verdict = (a) => (a.knowers.length
+    ? (partial ? `Based on fetched data, only ${who(a.knowers[0])} knows it well` : `${who(a.knowers[0])}`)
+    : `<span class="pill amber">${partial ? 'nobody in the fetched data' : 'nobody yet'}</span>`);
+  $('riskbody').classList.toggle('partial-list', partial);
+  $('riskbody').innerHTML = partialBanner("An area listed here may have more people who know it than Lore has seen, so don't read this as the project's bus factor.")
+    + (r.areas.length ? `<table class="grid"><tr><th>Area</th><th>Merged PRs${partial ? ' fetched' : ''}, 180 days</th><th>Active people who know it well${partial ? ' (in the fetched data)' : ''}</th></tr>
     ${r.areas.map((a) => `<tr><td><code>${esc(a.path)}</code><div class="muted" style="font-size:12px">${esc(a.repo)}</div></td><td>${a.recent_prs}</td>
-    <td>${a.knowers.length ? a.knowers.map((k) => `<a href="https://github.com/${esc(k)}" target="_blank">@${esc(k)}</a>`).join(', ') : '<span class="pill amber">nobody yet</span>'}</td></tr>`).join('')}</table>`
-    : '<p class="muted">No area is down to one person. Knowledge is spread well.</p>';
+    <td>${verdict(a)}${partialBadge()}</td></tr>`).join('')}</table>`
+    : (partial ? "<p class=\"muted\">In the fetched data, no area with recent work depends on a single active person. With partial data, that isn't a clean bill of health.</p>"
+      : '<p class="muted">No area is down to one person. Knowledge is spread well.</p>'));
 }
 
 function resetSteps() { $('steps').innerHTML = ''; }
@@ -195,7 +221,7 @@ async function ask(question, opts = {}) {
         else if (e.type === 'result') { const s = document.createElement('div'); s.className = 'args'; s.textContent = '→ ' + e.summary; $('steps').lastElementChild?.appendChild(s); }
         else if (e.type === 'error') { addStep('error', 'Stopped', esc(e.message)); $('answerbody').innerHTML = `<p>${esc(e.message)}</p>`; }
         else if (e.type === 'answer') {
-          $('answerbody').innerHTML = md(e.text);
+          $('answerbody').innerHTML = partialBanner('This answer was written from that data.') + caveatNote(e.caveats) + `<div id="answertext">${md(e.text)}</div>`;
           $('answermeta').textContent = `${esc(e.model)} · ${queries} graph queries · ${((performance.now() - t0) / 1000).toFixed(1)} s`;
           $('copybtn').hidden = !opts.dry;
           addStep('model', 'Answer ready', `${e.evidence.items.length} sources, ${e.evidence.people.length} people`);
@@ -217,11 +243,11 @@ async function loadTeams() {
   $('teamsbody').textContent = 'Running community detection…';
   const r = await fetch(`/api/teams?project=${encodeURIComponent(state.project)}`).then((x) => x.json());
   resetSteps(); r.trace.forEach((q) => addQuery(q, $('steps')));
-  $('teamsbody').innerHTML = r.teams.length ? r.teams.map((t, i) => `<div class="card" style="margin-bottom:12px">
+  $('teamsbody').innerHTML = partialBanner('Teams are drawn from the reviews Lore read.') + (r.teams.length ? r.teams.map((t, i) => `<div class="card" style="margin-bottom:12px">
     <strong>Team ${i + 1}</strong> <span class="muted">· ${t.size} people</span>
     <div class="chips">${t.members.map((m) => `<a class="chip" href="https://github.com/${esc(m.login)}" target="_blank" rel="noopener" title="PageRank ${m.centrality}">@${esc(m.login)}${m.active ? '' : ' (inactive)'}</a>`).join('')}</div>
     <div class="muted" style="font-size:13px">Knows best: ${t.areas.map((a) => `<code>${esc(a.path)}</code> <span style="font-size:12px">(${esc(a.repo.split('/')[1] || a.repo)})</span>`).join(', ')}</div></div>`).join('')
-    : '<p class="muted">No strong review ties yet: nobody has reviewed the same person 5 times.</p>';
+    : '<p class="muted">No strong review ties yet: nobody has reviewed the same person 5 times.</p>');
 }
 
 async function loadMemory() {

@@ -5,3 +5,4 @@ __pycache__/
 data/*.rdb
 data/cache/
 data/git/
+data/*.rdb.settings
